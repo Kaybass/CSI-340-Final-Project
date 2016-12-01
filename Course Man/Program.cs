@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Course_Man
+namespace CourseMan
 {
     static class Program
     {
@@ -14,6 +15,25 @@ namespace Course_Man
         [STAThread]
         static void Main()
         {
+            // Some test code.
+
+            Course c = new Course();
+            c.CourseID = new CourseID("CSI", 385);
+            c.Name = "Operating Systems Architecture";
+            c.Description = "Write the FAT12 with Josh!";
+            c.InstructorID = 123;
+            
+            Section s = new Section();
+            s.CourseID = c.CourseID;
+            s.SectionID = 2;
+            s.MeetingTimes.Add(new MeetingTime(DayOfWeek.Tuesday,
+                new TimeSpan(12, 30, 0), new TimeSpan(1, 45, 0)));
+            s.Room = new Room("Wick", 101);
+
+            Debug.WriteLine(c.CourseID + " "  + c.Name);
+            Debug.WriteLine(s);
+            Debug.WriteLine(s.Room);
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());

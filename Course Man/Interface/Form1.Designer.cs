@@ -1,4 +1,4 @@
-﻿namespace Course_Man
+﻿namespace CourseMan
 {
     partial class Form1
     {
