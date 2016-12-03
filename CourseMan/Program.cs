@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using CourseMan.Domain;
 
 namespace CourseMan
 {
@@ -24,14 +25,13 @@ namespace CourseMan
             c.InstructorID = 123;
             
             Section s = new Section();
-            s.CourseID = c.CourseID;
-            s.SectionID = 2;
+            s.SectionID = new SectionID(c.CourseID, 2);
             s.MeetingTimes.Add(new MeetingTime(DayOfWeek.Tuesday,
                 new TimeSpan(12, 30, 0), new TimeSpan(1, 45, 0)));
             s.Room = new Room("Wick", 101);
 
             Debug.WriteLine(c.CourseID + " "  + c.Name);
-            Debug.WriteLine(s);
+            Debug.WriteLine(s.SectionID);
             Debug.WriteLine(s.Room);
 
             Application.EnableVisualStyles();

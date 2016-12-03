@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CourseMan
+namespace CourseMan.Domain
 {
     public class Schedule
     {
@@ -13,6 +13,7 @@ namespace CourseMan
 
         public Schedule()
         {
+			sections = new List<Section>();
         }
 
 
@@ -26,6 +27,7 @@ namespace CourseMan
             }
             return false;
         }
+
 
         public List<Section> Sections
         {

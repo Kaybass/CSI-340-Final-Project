@@ -4,12 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CourseMan
+namespace CourseMan.Domain
 {
     public class Section
     {
-        private int sectionId; // 2 digit section ID number
-        private CourseID courseId;
+        private SectionID sectionId;
         private Room room;
         private List<MeetingTime> meetingTimes;
 
@@ -18,6 +17,7 @@ namespace CourseMan
         {
             meetingTimes = new List<MeetingTime>();
         }
+
 
         // Check if the section is currently meeting during the given date-time.
         public bool IsMeetingAt(DateTime dateTime)
@@ -32,10 +32,11 @@ namespace CourseMan
 
         public override string ToString()
         {
-            return String.Format("{0}-{1,2:00}", courseId.ToString(), sectionId);
+            return sectionId.ToString();
         }
 
-        public int SectionID
+
+        public SectionID SectionID
         {
             get { return sectionId; }
             set { sectionId = value; }
@@ -43,8 +44,8 @@ namespace CourseMan
 
         public CourseID CourseID
         {
-            get { return courseId; }
-            set { courseId = value; }
+            get { return sectionId.CourseID; }
+            set { sectionId.CourseID = value; }
         }
 
         public Room Room

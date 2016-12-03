@@ -4,24 +4,24 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CourseMan
+namespace CourseMan.Domain
 {
     public struct CourseID
     {
         private string majorCode; // 3-letter major code (ex: CSI)
-        private int courseId; // 3-digit course ID (unique per major code).
+        private int courseNumber; // 3-digit course number (unique per major code).
 
 
-        public CourseID(string majorCode, int courseId)
+        public CourseID(string majorCode, int courseNumber)
         {
             this.majorCode = majorCode;
-            this.courseId = courseId;
+            this.courseNumber = courseNumber;
         }
 
 
         public override string ToString()
         {
-            return String.Format("{0}-{1}", majorCode, courseId);
+            return String.Format("{0}-{1,3:000}", majorCode, courseNumber);
         }
 
 
@@ -31,10 +31,10 @@ namespace CourseMan
             set { majorCode = value; }
         }
 
-        public int CourseId
+        public int CourseNumber
         {
-            get { return courseId; }
-            set { courseId = value; }
+            get { return courseNumber; }
+            set { courseNumber = value; }
         }
     }
 }
