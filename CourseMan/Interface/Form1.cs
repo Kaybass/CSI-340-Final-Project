@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using CourseMan.Interface;
 
 namespace CourseMan
 {
@@ -15,6 +16,22 @@ namespace CourseMan
         public Form1()
         {
             InitializeComponent();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if(textBox1.Text == "meme")
+            {
+                AdminForm form = new AdminForm("meme");
+                this.Hide();
+                form.Show();
+                
+            }
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
