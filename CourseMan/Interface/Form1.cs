@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using CourseMan.Interface;
+using CourseMan.Domain;
 
 namespace CourseMan
 {
@@ -20,13 +21,33 @@ namespace CourseMan
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if(textBox1.Text == "meme")
+            Dictionary<int,User> users = CourseSectionHandler.Instance.Users;
+
+            for(int i = 1; i <= users.Count; i++)
             {
-                AdminForm form = new AdminForm("meme");
-                this.Hide();
-                form.ShowDialog();
-                this.Show();
-                
+                if(users[i].Username == textBox1.Text &&
+                    users[i].Password == textBox2.Text)
+                {
+                    if(users[i].Type == UserType.Administrator)
+                    {
+                        this.Hide();
+                        Form newForm = new AdminForm("meme");
+                        newForm.ShowDialog();
+                        this.Show();
+                    }
+                    else if (users[i].Type == UserType.Instructor)
+                    {
+
+                    }
+                    else if(users[i].Type == UserType.Student)
+                    {
+
+                    }
+                    else
+                    {
+                        //error
+                    }
+                }
             }
         }
 

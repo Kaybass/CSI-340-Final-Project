@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using CourseMan.Domain;
+using CourseMan.Interface;
 
 namespace CourseMan
 {
@@ -18,45 +19,47 @@ namespace CourseMan
         {
             // Some test code.
 
-            Course c = new Course() {
-				CourseID = new CourseID("CSI", 385),
-				Name = "Operating Systems Architecture",
-				Description = "Write the FAT12 with Josh!",
-				InstructorID = 0xBAD,
-			};
-            
-            Section s = new Section() {
-				SectionID = new SectionID(c.CourseID, 2),
-				MaxSeats = 20,
-				Room = new Room("Wick", 101),
-			};
-            s.MeetingTimes.Add(new MeetingTime(DayOfWeek.Tuesday, 12,30, 1,45));
+            //         Course c = new Course() {
+            //	CourseID = new CourseID("CSI", 385),
+            //	Name = "Operating Systems Architecture",
+            //	Description = "Write the FAT12 with Josh!",
+            //	InstructorID = 0xBAD,
+            //};
 
-			User u = new User() {
-				UserID = 1,
-				Username = "bob",
-				Password = "12345",
-				Type = UserType.Student,
-				Department = Department.CompSci,
-			};
+            //         Section s = new Section() {
+            //	SectionID = new SectionID(c.CourseID, 2),
+            //	MaxSeats = 20,
+            //	Room = new Room("Wick", 101),
+            //};
+            //         s.MeetingTimes.Add(new MeetingTime(DayOfWeek.Tuesday, 12,30, 1,45));
 
-            Debug.WriteLine(c.CourseID + " "  + c.Name);
-            Debug.WriteLine(s.SectionID);
-            Debug.WriteLine(s.Room);
-			
-			CourseSectionHandler.Instance.AddCourse(c);
-			CourseSectionHandler.Instance.AddSection(s);
-			CourseSectionHandler.Instance.AddUser(u);
+            //User u = new User() {
+            //	UserID = 1,
+            //	Username = "bob",
+            //	Password = "12345",
+            //	Type = UserType.Student,
+            //	Department = Department.CompSci,
+            //};
 
-			RegistrationService registrationService = new RegistrationService();
+            //         Debug.WriteLine(c.CourseID + " "  + c.Name);
+            //         Debug.WriteLine(s.SectionID);
+            //         Debug.WriteLine(s.Room);
 
-			registrationService.Register(u.UserID, s.SectionID);
+            //CourseSectionHandler.Instance.AddCourse(c);
+            //CourseSectionHandler.Instance.AddSection(s);
+            //CourseSectionHandler.Instance.AddUser(u);
 
-			//CourseSectionHandler.Instance.Courses;
+            //RegistrationService registrationService = new RegistrationService();
 
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            //registrationService.Register(u.UserID, s.SectionID);
+
+            //CourseSectionHandler.Instance.Courses;
+
+            TestData data = new TestData();
+            data.addTheDataToTheThing();
+
+            LogIn login = new LogIn();
+            login.LogMeIn();
         }
     }
 }

@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{9FD7AD1F-0425-4624-8F2C-CD4AC7F48739}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>CourseMan</RootNamespace>
     <AssemblyName>CourseMan</AssemblyName>
@@ -32,6 +32,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -54,6 +57,7 @@
     <Compile Include="Domain\ValueObjects\CourseID.cs" />
     <Compile Include="Domain\ValueObjects\Schedule.cs" />
     <Compile Include="Domain\ValueObjects\SectionID.cs" />
+    <Compile Include="Interface\Admin.cs" />
     <Compile Include="Interface\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -67,12 +71,15 @@
     <Compile Include="Interface\AdminForm.Designer.cs">
       <DependentUpon>AdminForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Interface\Instructor.cs" />
+    <Compile Include="Interface\LogIn.cs" />
     <Compile Include="Interface\ProfessorForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Interface\ProfessorForm.Designer.cs">
       <DependentUpon>ProfessorForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Interface\Student.cs" />
     <Compile Include="Interface\StudentForm.cs">
       <SubType>Form</SubType>
     </Compile>
