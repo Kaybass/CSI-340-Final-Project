@@ -7,6 +7,9 @@ using CourseMan.Domain.ValueObjects;
 
 namespace CourseMan.Domain
 {
+	// Entity class representing an instance of a course. Courses
+	// are offered as multiple sections which students can register for,
+	// each being able to have different instructors and meeting times/places.
     public class Section
     {
         private SectionID sectionId;

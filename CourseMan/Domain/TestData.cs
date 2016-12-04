@@ -7,13 +7,16 @@ using CourseMan.Domain.ValueObjects;
 
 namespace CourseMan.Domain
 {
-    class TestData
+	// Class used to populate the system with some initial test data,
+	// including users (students, instructors, and admins), courses, and
+	// sections.
+    public class TestData
     {
         public TestData()
         {
-
         }
-
+		
+		// Populate initial test data to the system.
         public void addTheDataToTheThing()
         {
             CourseSectionHandler csh = CourseSectionHandler.Instance;
@@ -22,10 +25,11 @@ namespace CourseMan.Domain
             User b = new User(2, "Brian.Banana", "password", "Instructor", "CompSci");
             User c = new User(3, "Chris.Cabana", "password", "Student", "CompSci");
             User d = new User(4, "Dell.Diesel", "password", "Student", "CompSci");
-            User e = new User(5, "Evan.Edmund", "password", "Student", "CompSci");
+            User e = new User(5, "Evan.Edmunds", "password", "Student", "CompSci");
             User f = new User(6, "Faith.Faker", "password", "Student", "CompSci");
             User g = new User(7, "Gabriella.Gilly", "password", "Student", "CompSci");
             User h = new User(8, "Harrison.Hammy", "password", "Student", "CompSci");
+			User mrConvenient = new User(1, "a", "a", "Administrator", "CompSci");
 
             csh.AddUser(a);
             csh.AddUser(b);
@@ -35,6 +39,7 @@ namespace CourseMan.Domain
             csh.AddUser(f);
             csh.AddUser(g);
             csh.AddUser(h);
+            csh.AddUser(mrConvenient);
 
             Course softwareSpecialities = new Course(new CourseID("CSI", 340), "Software Specialities", "A class in domain-driven design");
 

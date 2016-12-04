@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 
 namespace CourseMan.Domain.ValueObjects
 {
+	// Value object representing the time range and
+	// day-of-the-week of when a section meets.
     public struct MeetingTime
     {
         private DayOfWeek dayOfWeek;
@@ -40,6 +42,15 @@ namespace CourseMan.Domain.ValueObjects
 		{
 			return (other.endTime <= startTime || other.startTime >= endTime);
 		}
+
+        public override string ToString()
+        {
+            string output;
+
+            output = startTime.ToString() + " - " + endTime.ToString() + ", " + dayOfWeek.ToString();
+
+            return output;
+        }
 
 
         public DayOfWeek DayOfWeek

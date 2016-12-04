@@ -7,12 +7,17 @@ using CourseMan.Domain;
 
 namespace CourseMan.Application.ValueObjects
 {
+	// Aggregate object representing a user's schedule of sections.
+	// If the user is a student, then the schedule is a list of sections
+	// he/she is registered for. If the user is a instructor, then the
+	// schedule is a list of sections he/she is instructing.
     public class Schedule
     {
 		private int userId;
         private List<Section> sections;
 
 
+		// Constructor 
         public Schedule(int userId)
         {
 			this.userId = userId;

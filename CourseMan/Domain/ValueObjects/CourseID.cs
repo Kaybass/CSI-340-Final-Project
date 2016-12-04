@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace CourseMan.Domain.ValueObjects
 {
+	// Value object used to identify courses.
     public struct CourseID
     {
         private string majorCode; // 3-letter major code (ex: CSI)
@@ -17,8 +18,9 @@ namespace CourseMan.Domain.ValueObjects
             this.majorCode = majorCode;
             this.courseNumber = courseNumber;
         }
-
-
+		
+		// Convert a course ID to a string, combining the major code and
+		// course number separated by a dash (ex: CSI-340)
         public override string ToString()
         {
             return String.Format("{0}-{1,3:000}", majorCode, courseNumber);
