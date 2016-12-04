@@ -30,6 +30,30 @@ namespace CourseMan.Domain
             return String.Format("{0}-{1,2:00}", courseId.ToString(), sectionNumber);
         }
 
+		public override bool Equals(object obj)
+		{
+			return (obj is SectionID && (SectionID) obj == this);
+		}
+
+		public override int GetHashCode()
+		{
+			int hash = 13;
+			hash = (hash * 7) + courseId.GetHashCode();
+			hash = (hash * 7) + sectionNumber;
+			return hash;
+		}
+
+		public static bool operator ==(SectionID a, SectionID b)
+		{
+			return (a.courseId == b.courseId &&
+					a.sectionNumber == b.sectionNumber);
+		}
+
+		public static bool operator !=(SectionID a, SectionID b)
+		{
+			return !(a == b);
+		}
+
 
         public CourseID CourseID
         {

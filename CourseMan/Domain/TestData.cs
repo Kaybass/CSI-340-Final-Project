@@ -15,7 +15,7 @@ namespace CourseMan.Domain
 
         public void addTheDataToTheThing()
         {
-            CourseSectionHandler csh = CourseSectionHandler.getInstance();
+            CourseSectionHandler csh = CourseSectionHandler.Instance;
 
             //create List<object>s of data
 

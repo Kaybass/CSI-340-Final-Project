@@ -11,13 +11,22 @@ namespace CourseMan.Domain
         private SectionID sectionId;
         private Room room;
         private List<MeetingTime> meetingTimes;
+		private HashSet<int> registeredStudentIds;
+		private int maxSeats;
 
 
         public Section()
         {
             meetingTimes = new List<MeetingTime>();
+			registeredStudentIds = new HashSet<int>();
         }
 
+
+		// Return whether the given student is currently registered for this section.
+		public bool IsStudentRegistered(int studentId)
+		{
+			return registeredStudentIds.Contains(studentId);
+		}
 
         // Check if the section is currently meeting during the given date-time.
         public bool IsMeetingAt(DateTime dateTime)
@@ -57,7 +66,22 @@ namespace CourseMan.Domain
         public List<MeetingTime> MeetingTimes
         {
             get { return meetingTimes; }
-            set { meetingTimes = value; }
         }
+
+        public ISet<int> RegisteredStudents
+        {
+            get { return registeredStudentIds; }
+        }
+
+		public int MaxSeats
+		{
+            get { return maxSeats; }
+            set { maxSeats = value; }
+		}
+		
+		public int AvailableSeats
+		{
+            get { return maxSeats - registeredStudentIds.Count; }
+		}
     }
 }

@@ -6,15 +6,15 @@ using System.Threading.Tasks;
 
 namespace CourseMan.Domain
 {
-    enum userType {Student, Instructor, Administrator};
-    enum Department { CompSci, Engineering, Psychology, English, History }
-
-    class User
+    public enum UserType { Student, Instructor, Administrator };
+    public enum Department { CompSci, Engineering, Psychology, English, History }
+	
+    public class User
     {
         private int userId;
         private string username;
         private string password;
-        private userType type;
+        private UserType type;
         private Department department; // department ≈ major
 
         public User()
@@ -40,7 +40,7 @@ namespace CourseMan.Domain
             set { password = value; }
         }
 
-        public userType Type
+        public UserType Type
         {
             get { return type; }
             set { type = value; }

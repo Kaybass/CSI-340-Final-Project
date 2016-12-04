@@ -24,6 +24,30 @@ namespace CourseMan.Domain
             return String.Format("{0}-{1,3:000}", majorCode, courseNumber);
         }
 
+		public override bool Equals(object obj)
+		{
+			return (obj is CourseID && (CourseID) obj == this);
+		}
+
+		public override int GetHashCode()
+		{
+			int hash = 13;
+			hash = (hash * 7) + majorCode.GetHashCode();
+			hash = (hash * 7) + courseNumber;
+			return hash;
+		}
+
+		public static bool operator ==(CourseID a, CourseID b)
+		{
+			return (a.majorCode == b.majorCode &&
+					a.courseNumber == b.courseNumber);
+		}
+
+		public static bool operator !=(CourseID a, CourseID b)
+		{
+			return !(a == b);
+		}
+
 
         public string MajorCode
         {

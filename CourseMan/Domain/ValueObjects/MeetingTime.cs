@@ -19,6 +19,14 @@ namespace CourseMan.Domain
             this.startTime = startTime;
             this.endTime = endTime;
         }
+		
+        public MeetingTime(DayOfWeek dayOfWeek, int startTimeHours, int startTimeMinutes,
+						   int endTimeHours, int endTimeMinutes)
+        {
+            this.dayOfWeek = dayOfWeek;
+            this.startTime = new TimeSpan(startTimeHours, startTimeMinutes, 0);
+            this.endTime = new TimeSpan(endTimeHours, endTimeMinutes, 0);
+        }
 
 
         // Check if this meeting time is occuring during the given date-time.
