@@ -29,6 +29,7 @@ namespace CourseMan.Domain
             User f = new User(6, "Faith.Faker", "password", "Student", "CompSci");
             User g = new User(7, "Gabriella.Gilly", "password", "Student", "CompSci");
             User h = new User(8, "Harrison.Hammy", "password", "Student", "CompSci");
+			User mrConvenient = new User(1, "a", "a", "Administrator", "CompSci");
 
             csh.AddUser(a);
             csh.AddUser(b);
@@ -38,6 +39,7 @@ namespace CourseMan.Domain
             csh.AddUser(f);
             csh.AddUser(g);
             csh.AddUser(h);
+            csh.AddUser(mrConvenient);
 
             Course softwareSpecialities = new Course(new CourseID("CSI", 340), "Software Specialities", "A class in domain-driven design");
 
