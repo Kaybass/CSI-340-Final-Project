@@ -12,14 +12,16 @@ namespace CourseMan.Interface
 {
 	public class LoginMenu : SubMenu
 	{
-		private AdminConsole   adminConsole;
-        private StudentConsole studentConsole;
+		private AdminConsole      adminConsole;
+        private StudentConsole    studentConsole;
+        private InstructorConsole instructorconsole;
 		
 
 		public LoginMenu()
 		{
 			adminConsole = new AdminConsole();
             studentConsole = new StudentConsole();
+            instructorconsole = new InstructorConsole();
 
 
 			Text = "Welcome to the CourseMan! Please login to continue.";
@@ -51,7 +53,7 @@ namespace CourseMan.Interface
                         EnterSubMenu(adminConsole);
                         break;
                     case UserType.Instructor:
-                        Console.WriteLine("TODO");
+                        EnterSubMenu(instructorconsole);
                         break;
                     case UserType.Student:
                         EnterSubMenu(studentConsole);
