@@ -3,28 +3,58 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Collections;
 
 namespace CourseMan.Domain
 {
-    class courseSectionHandler
+    class CourseSectionHandler
     {
-        private CourseID courseId;
-        private int sectionId;
+        private List<User> Users;
 
-        private static courseSectionHandler instance = null;
+        private List<Course> Courses;
+
+        private List<Section> Sections;
+
+        private static CourseSectionHandler instance = null;
         
-        public courseSectionHandler() { }
+        private CourseSectionHandler() { }
         
-        public static courseSectionHandler Instance
+        public static CourseSectionHandler getInstance()
         {
-            get
-            {
-                if(instance == null)
-                {
-                    instance = new courseSectionHandler();
-                }
-                return instance;
-            }
+
+           if(instance == null)
+           {
+                instance = new CourseSectionHandler();
+           }
+           return instance;
+
         } 
+
+        public void setUsers(List<User> users)
+        {
+            Users = users;
+        }
+        public List<User> getUsers()
+        {
+            return Users;
+        }
+
+        public void setCourses(List<Course> courses)
+        {
+            Courses = courses;
+        }
+        public List<Course> getCourses()
+        {
+            return Courses;
+        }
+
+        public void setSections(List<Section> sections)
+        {
+            Sections = sections;
+        }
+        public List<Section> getSections()
+        {
+            return Sections;
+        }
     }
 }

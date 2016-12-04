@@ -48,7 +48,7 @@
             this.ClientSize = new System.Drawing.Size(802, 534);
             this.Controls.Add(this.label1);
             this.Name = "AdminForm";
-            this.Text = "Form2";
+            this.Text = "Course Man";
             this.ResumeLayout(false);
             this.PerformLayout();
 
