@@ -7,54 +7,69 @@ using System.Collections;
 
 namespace CourseMan.Domain
 {
-    class CourseSectionHandler
+    public class CourseSectionHandler
     {
-        private List<User> Users;
+        private Dictionary<int, User> users;
 
-        private List<Course> Courses;
+        private Dictionary<CourseID, Course> courses;
 
-        private List<Section> Sections;
+        private Dictionary<SectionID, Section> sections;
 
         private static CourseSectionHandler instance = null;
         
-        private CourseSectionHandler() { }
-        
-        public static CourseSectionHandler getInstance()
-        {
 
-           if(instance == null)
-           {
-                instance = new CourseSectionHandler();
-           }
-           return instance;
+        private CourseSectionHandler()
+		{
+			users = new Dictionary<int, User>();
+			courses = new Dictionary<CourseID, Course>();
+			sections = new Dictionary<SectionID, Section>();
+		}
 
-        } 
 
-        public void setUsers(List<User> users)
+		public void AddCourse(Course course)
+		{
+			courses[course.CourseID] = course;
+		}
+		
+		public void AddSection(Section section)
+		{
+			sections[section.SectionID] = section;
+		}
+		
+		public void AddUser(User user)
+		{
+			users[user.UserID] = user;
+		}
+
+
+		public static CourseSectionHandler Instance
+		{
+			get
+			{
+				if (instance == null)
+				{
+					instance = new CourseSectionHandler();
+				}
+				return instance;
+			}
+		}
+
+		public Dictionary<int, User> Users
         {
-            Users = users;
-        }
-        public List<User> getUsers()
-        {
-            return Users;
+            get { return users; }
+            set { users = value; }
         }
 
-        public void setCourses(List<Course> courses)
+		public Dictionary<CourseID, Course> Courses
         {
-            Courses = courses;
-        }
-        public List<Course> getCourses()
-        {
-            return Courses;
+            get { return courses; }
+            set { courses = value; }
         }
 
-        public void setSections(List<Section> sections)
+		public Dictionary<SectionID, Section> Sections
         {
-            Sections = sections;
-        }
-        public List<Section> getSections()
-        {
-            return Sections;
+            get { return sections; }
+            set { sections = value; }
         }
     }
 }

@@ -48,6 +48,7 @@
   <ItemGroup>
     <Compile Include="Domain\Course.cs" />
     <Compile Include="Domain\CourseSectionHandler.cs" />
+    <Compile Include="Domain\RegistrationService.cs" />
     <Compile Include="Domain\TestData.cs" />
     <Compile Include="Domain\User.cs" />
     <Compile Include="Domain\ValueObjects\CourseID.cs" />

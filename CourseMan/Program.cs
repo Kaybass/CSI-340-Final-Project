@@ -18,21 +18,41 @@ namespace CourseMan
         {
             // Some test code.
 
-            Course c = new Course();
-            c.CourseID = new CourseID("CSI", 385);
-            c.Name = "Operating Systems Architecture";
-            c.Description = "Write the FAT12 with Josh!";
-            c.InstructorID = 123;
+            Course c = new Course() {
+				CourseID = new CourseID("CSI", 385),
+				Name = "Operating Systems Architecture",
+				Description = "Write the FAT12 with Josh!",
+				InstructorID = 0xBAD,
+			};
             
-            Section s = new Section();
-            s.SectionID = new SectionID(c.CourseID, 2);
-            s.MeetingTimes.Add(new MeetingTime(DayOfWeek.Tuesday,
-                new TimeSpan(12, 30, 0), new TimeSpan(1, 45, 0)));
-            s.Room = new Room("Wick", 101);
+            Section s = new Section() {
+				SectionID = new SectionID(c.CourseID, 2),
+				MaxSeats = 20,
+				Room = new Room("Wick", 101),
+			};
+            s.MeetingTimes.Add(new MeetingTime(DayOfWeek.Tuesday, 12,30, 1,45));
+
+			User u = new User() {
+				UserID = 1,
+				Username = "bob",
+				Password = "12345",
+				Type = UserType.Student,
+				Department = Department.CompSci,
+			};
 
             Debug.WriteLine(c.CourseID + " "  + c.Name);
             Debug.WriteLine(s.SectionID);
             Debug.WriteLine(s.Room);
+			
+			CourseSectionHandler.Instance.AddCourse(c);
+			CourseSectionHandler.Instance.AddSection(s);
+			CourseSectionHandler.Instance.AddUser(u);
+
+			RegistrationService registrationService = new RegistrationService();
+
+			registrationService.Register(u.UserID, s.SectionID);
+
+			//CourseSectionHandler.Instance.Courses;
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
