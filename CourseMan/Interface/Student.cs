@@ -37,7 +37,7 @@ namespace CourseMan.Interface
                         foreach(KeyValuePair<SectionID, Section> p in CourseSectionHandler.Instance.Sections)
                         {
                             Console.WriteLine("SectionID: {0}\nCourseID: {1}\nCourse Name: {2}\nInstructor: {3}\nSeats: {4}/{5}\nFilled: {6}\nRoom: {7}",
-                                p.Value.SectionID,p.Value.CourseID,CourseSectionHandler.Instance.Courses[p.Value.CourseID],
+                                p.Value.SectionID,p.Value.CourseID,CourseSectionHandler.Instance.Courses[p.Value.CourseID].Name,
                                 CourseSectionHandler.Instance.Users[p.Value.InstructorID].Username, p.Value.AvailableSeats,p.Value.MaxSeats,
                                 p.Value.IsFull, p.Value.Room);
                         }
@@ -46,9 +46,33 @@ namespace CourseMan.Interface
                         break;
                     case "S":
                     case "s":
+                        Console.Clear();
+                        foreach (KeyValuePair<SectionID, Section> p in CourseSectionHandler.Instance.Sections)
+                        {
+                            if (p.Value.IsStudentRegistered(CurrentUserId))
+                            {
+                                Console.WriteLine("CourseName: {0}\nRoom: {1}\nTime: {2}",
+                                    CourseSectionHandler.Instance.Courses[p.Value.CourseID].Name, p.Value.Room, p.Value.MeetingInfo.Times);
+                            }
+                        }
+                        Console.ReadLine();
+                        Console.Clear();
                         break;
                     case "R":
                     case "r":
+                        Console.WriteLine("Enter in the Section ID for the section you want to register");
+                        string code = Console.ReadLine();
+                        string classnum = Console.ReadLine();
+                        int classid = int.Parse(classnum);
+                        string sectnum = Console.ReadLine();
+                        int sectid = int.Parse(sectnum);
+
+                        SectionID ID = new SectionID(code, classid, sectid);
+
+                        RegistrationService reg = new RegistrationService();
+
+                        reg.Register(CurrentUserId, ID);
+
                         break;
                     case "L":
                     case "l":
