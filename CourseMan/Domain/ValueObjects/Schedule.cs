@@ -8,12 +8,14 @@ namespace CourseMan.Domain
 {
     public class Schedule
     {
-        public List<Section> sections;
+		private int studentId;
+        private List<Section> sections;
 
 
-        public Schedule()
+        public Schedule(int studentId)
         {
-			sections = new List<Section>();
+			this.studentId = studentId;
+			this.sections = new List<Section>();
         }
 
 
@@ -27,7 +29,13 @@ namespace CourseMan.Domain
             }
             return false;
         }
+		
 
+        public int StudentID
+        {
+            get { return studentId; }
+            set { studentId = value; }
+        }
 
         public List<Section> Sections
         {

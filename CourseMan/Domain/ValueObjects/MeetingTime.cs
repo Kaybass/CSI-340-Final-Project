@@ -12,6 +12,13 @@ namespace CourseMan.Domain
         private TimeSpan startTime;
         private TimeSpan endTime;
         
+		
+        public MeetingTime(DayOfWeek dayOfWeek, int startTimeHours, int startTimeMinutes, int endTimeHours, int endTimeMinutes)
+        {
+            this.dayOfWeek = dayOfWeek;
+            this.startTime = new TimeSpan(startTimeHours, startTimeMinutes, 0);
+            this.endTime = new TimeSpan(endTimeHours, endTimeMinutes, 0);
+        }
 
         public MeetingTime(DayOfWeek dayOfWeek, TimeSpan startTime, TimeSpan endTime)
         {
@@ -20,13 +27,19 @@ namespace CourseMan.Domain
             this.endTime = endTime;
         }
         
-        // Check if this meeting time is occuring during the given date-time.
+        // Return true if this meeting time is occuring during the given date-time.
         public bool IsOccuringAt(DateTime dateTime)
         {
             return (dateTime.DayOfWeek == dayOfWeek &&
                     dateTime.TimeOfDay >= startTime &&
                     dateTime.TimeOfDay <= endTime);
         }
+
+		// Return true if the given meeting time interfereces with this one.
+		public bool InterferesWith(MeetingTime other)
+		{
+			return (other.endTime <= startTime || other.startTime >= endTime);
+		}
 
 
         public DayOfWeek DayOfWeek

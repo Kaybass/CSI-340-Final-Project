@@ -90,5 +90,10 @@ namespace CourseMan.Domain
 		{
             get { return maxSeats - registeredStudentIds.Count; }
 		}
+
+		public bool IsFull
+		{
+			get { return (AvailableSeats == 0); }
+		}
     }
 }
