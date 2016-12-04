@@ -12,9 +12,6 @@ namespace CourseMan.Interface
 {
     class StudentConsole : SubMenu
     {
-        private SubMenu subMenu;
-
-
         public StudentConsole()
         {
           
