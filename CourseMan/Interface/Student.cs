@@ -8,5 +8,16 @@ namespace CourseMan.Interface
 {
     class Student
     {
+        private int CurrentUserId;
+
+        public Student(int id)
+        {
+            CurrentUserId = id;
+        }
+
+        public void DoStudentThings()
+        {
+
+        }
     }
 }
