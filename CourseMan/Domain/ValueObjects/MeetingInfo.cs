@@ -45,7 +45,7 @@ namespace CourseMan.Domain.ValueObjects
         // Return whether this is currently meeting during the given date-time.
         public bool IsMeetingAt(DateTime dateTime)
         {
-            foreach (MeetingTime meetigTime in times)
+            foreach (MeetingTime meetingTime in times)
             {
                 if (meetigTime.IsOccuringAt(dateTime))
                     return true;
