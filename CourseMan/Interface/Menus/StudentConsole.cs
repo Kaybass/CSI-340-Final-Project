@@ -59,21 +59,47 @@ namespace CourseMan.Interface
 
         public void RegisterForSection()
         {
+            int classid = 0, sectid = 0;
             Console.Clear();
             Console.WriteLine("Enter in the majorcode for the section you want to register");
             string code = Console.ReadLine();
             Console.WriteLine("Course code");
             string classnum = Console.ReadLine();
-            int classid = int.Parse(classnum);
+            try
+            {
+                classid = int.Parse(classnum);
+            }
+            catch
+            {
+                Console.Clear();
+                Console.WriteLine("invalid");
+                return;
+            }
             Console.WriteLine("Section id");
             string sectnum = Console.ReadLine();
-            int sectid = int.Parse(sectnum);
-
+            try
+            {
+                sectid = int.Parse(sectnum);
+            }
+            catch
+            {
+                Console.Clear();
+                Console.WriteLine("invalid");
+                return;
+            }
             SectionID ID = new SectionID(code, classid, sectid);
 
             RegistrationService reg = new RegistrationService();
-
-            reg.Register(AuthenticationService.Instance.LoggedInUser.UserID, ID);
+            try
+            {
+                reg.Register(AuthenticationService.Instance.LoggedInUser.UserID, ID);
+            }
+            catch
+            {
+                Console.Clear();
+                Console.WriteLine("invalid");
+                return;
+            }
             Console.Clear();
         }
 
