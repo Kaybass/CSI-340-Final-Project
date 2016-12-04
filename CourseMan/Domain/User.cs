@@ -22,6 +22,44 @@ namespace CourseMan.Domain
             // Constructor
         }
 
+        public User(int uId, string uName, string uPass, string uType, string uDepartment)
+        {
+            userId = uId;
+            username = uName;
+            password = uPass;
+            switch(uType)
+            {
+                case "Student":
+                    type = UserType.Student;
+                    break;
+                case "Instructor":
+                    type = UserType.Instructor;
+                    break;
+                case "Administrator":
+                    type = UserType.Administrator;
+                    break;
+            }
+
+            switch(uDepartment)
+            {
+                case "CompSci":
+                    department = Department.CompSci;
+                    break;
+                case "Engineering":
+                    department = Department.Engineering;
+                    break;
+                case "Psychology":
+                    department = Department.Psychology;
+                    break;
+                case "English":
+                    department = Department.English;
+                    break;
+                case "History":
+                    department = Department.History;
+                    break;
+            }
+        }
+
         public int UserID
         {
             get { return userId; }

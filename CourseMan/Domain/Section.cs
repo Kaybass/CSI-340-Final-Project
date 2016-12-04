@@ -21,9 +21,16 @@ namespace CourseMan.Domain
 			registeredStudentIds = new HashSet<int>();
         }
 
+        public Section(SectionID sId, Room sRoom, List<MeetingTime> sTimes)
+        {
+            sectionId = sId;
+            room = sRoom;
+            meetingTimes = new List<MeetingTime>();
+        }
 
-		// Return whether the given student is currently registered for this section.
-		public bool IsStudentRegistered(int studentId)
+
+        // Return whether the given student is currently registered for this section.
+        public bool IsStudentRegistered(int studentId)
 		{
 			return registeredStudentIds.Contains(studentId);
 		}
