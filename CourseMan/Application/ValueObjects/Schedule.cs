@@ -22,7 +22,7 @@ namespace CourseMan.Application.ValueObjects
 		// Return a list of scheduled sections for the given day of the week.
 		public IEnumerable<Section> GetSectionsOnDayOfWeek(DayOfWeek dayOfWeek)
 		{
-			return sections.Where(section => section.MeetingTimes
+			return sections.Where(section => section.MeetingInfo.Times
 				.Exists(time => time.DayOfWeek == dayOfWeek));
 		}
 
