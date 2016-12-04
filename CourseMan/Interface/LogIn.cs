@@ -37,9 +37,17 @@ namespace CourseMan.Interface
                                 break;
                             case UserType.Instructor:
 
+                                Instructor inst = new Instructor(p.Value.UserID);
+
+                                inst.DoInstructorThings();
+
                                 break;
 
                             case UserType.Student:
+
+                                Student stu = new Student(p.Value.UserID);
+
+                                stu.DoStudentThings();
 
                                 break;
 

@@ -22,10 +22,13 @@ namespace CourseMan.Domain
 			registeredStudentIds = new HashSet<int>();
         }
 
-        public Section(SectionID id, Room room, List<MeetingTime> times)
+        public Section(SectionID id, Room room, List<MeetingTime> times,int instructorid, int seats)
         {
             sectionId = id;
             meetingInfo = new MeetingInfo(room, times);
+            registeredStudentIds = new HashSet<int>();
+            instructorId = instructorid;
+            maxSeats = seats;
         }
 
 

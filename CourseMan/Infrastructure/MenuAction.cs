@@ -8,6 +8,7 @@ namespace CourseMan.Infrastructure
 {
 	public delegate void MenuActionDelegate();
 	
+	// A menu item which performs a single action.
 	// The leaf part of the Composite Pattern
 	public class MenuAction : IMenuItem
 	{

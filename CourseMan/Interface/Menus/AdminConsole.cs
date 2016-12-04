@@ -21,7 +21,7 @@ namespace CourseMan.Interface
 			subMenu = new SubMenu("Example Sub Menu");
 			subMenu.AddMenuAction('H', "Hello", delegate()
 			{
-				Console.Write("Hello, World!");
+				Console.WriteLine("Hello, World!");
 			});
 			subMenu.AddExitItem('B', "Back");
 
