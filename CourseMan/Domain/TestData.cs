@@ -22,7 +22,7 @@ namespace CourseMan.Domain
             User b = new User(2, "Brian.Banana", "password", "Instructor", "CompSci");
             User c = new User(3, "Chris.Cabana", "password", "Student", "CompSci");
             User d = new User(4, "Dell.Diesel", "password", "Student", "CompSci");
-            User e = new User(5, "Evan.Edmund", "password", "Student", "CompSci");
+            User e = new User(5, "Evan.Edmunds", "password", "Student", "CompSci");
             User f = new User(6, "Faith.Faker", "password", "Student", "CompSci");
             User g = new User(7, "Gabriella.Gilly", "password", "Student", "CompSci");
             User h = new User(8, "Harrison.Hammy", "password", "Student", "CompSci");

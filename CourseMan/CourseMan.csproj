@@ -65,6 +65,7 @@
     <Compile Include="Infrastructure\MenuAction.cs" />
     <Compile Include="Interface\Admin.cs" />
     <Compile Include="Interface\Menus\AdminConsole.cs" />
+    <Compile Include="Interface\Menus\InstructorConsole.cs" />
     <Compile Include="Interface\Menus\LoginMenu.cs" />
     <Compile Include="Interface\Form1.cs">
       <SubType>Form</SubType>
@@ -81,6 +82,7 @@
     </Compile>
     <Compile Include="Interface\Instructor.cs" />
     <Compile Include="Interface\LogIn.cs" />
+    <Compile Include="Interface\Menus\StudentConsole.cs" />
     <Compile Include="Interface\ProfessorForm.cs">
       <SubType>Form</SubType>
     </Compile>

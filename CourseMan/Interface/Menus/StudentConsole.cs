@@ -48,8 +48,12 @@ namespace CourseMan.Interface
             {
                 if (p.Value.IsStudentRegistered(AuthenticationService.Instance.LoggedInUser.UserID))
                 {
-                    Console.WriteLine("CourseName: {0}\nRoom: {1}\nTime: {2}",
-                        CourseSectionHandler.Instance.Courses[p.Value.CourseID].Name, p.Value.Room, p.Value.MeetingInfo.Times);
+                    Console.WriteLine("CourseName: {0}\nRoom: {1}\nTime:",
+                        CourseSectionHandler.Instance.Courses[p.Value.CourseID].Name, p.Value.Room);
+                    foreach(MeetingTime  m in p.Value.MeetingInfo.Times)
+                    {
+                        Console.WriteLine("{0}", m.ToString());
+                    }
                 }
             }
             Console.ReadLine();
