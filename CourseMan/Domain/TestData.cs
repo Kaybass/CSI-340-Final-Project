@@ -8,14 +8,6 @@ namespace CourseMan.Domain
 {
     class TestData
     {
-
-
-        private List<User> testUsers;
-
-        private List<Course> testCourses;
-
-        private List<Section> testSections;
-
         public TestData()
         {
 
@@ -34,24 +26,23 @@ namespace CourseMan.Domain
             User g = new User(0007, "Gabriella.Gilly", "pass0007", "Student", "CompSci");
             User h = new User(0008, "Harrison.Hammy", "pass0008", "Student", "CompSci");
 
-            testUsers.Add(a);
-            testUsers.Add(b);
-            testUsers.Add(c);
-            testUsers.Add(d);
-            testUsers.Add(e);
-            testUsers.Add(f);
-            testUsers.Add(g);
-            testUsers.Add(h);
+            csh.AddUser(a);
+            csh.AddUser(b);
+            csh.AddUser(c);
+            csh.AddUser(d);
+            csh.AddUser(e);
+            csh.AddUser(f);
+            csh.AddUser(g);
+            csh.AddUser(h);
 
             Course softwareSpecialities = new Course(new CourseID("CSI", 340), 0002, "Software Specialities", "A class in domain-driven design");
 
-            testCourses.Add(softwareSpecialities);
+            csh.AddCourse(softwareSpecialities);
 
             List<MeetingTime> meetingTimes = new List<MeetingTime>(); // Don't know how to initialize MeetingTime. What is value TimeSpan?
             Section z = new Section(new SectionID("CSI", 340, 01), new Room("Wick", 101), meetingTimes);
 
-            csh.setUsers(testUsers);
-            csh.setCourses(testCourses);
+            csh.AddSection(z);
         }
     }
 }
