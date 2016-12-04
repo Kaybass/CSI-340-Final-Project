@@ -32,14 +32,13 @@ namespace CourseMan.Interface
             AddMenuAction("CC", "Create a new course", delegate ()
             {
                 Console.Write("Are you sure you want to create a new course to add to the system?");
-<<<<<<< HEAD
 				input = Console.ReadLine();
 				if (input == "Y" || input == "y")
 				{
 					CreateNewCourse();
 				}
 			});
-			AddMenuAction('S', "Create a new section", delegate()
+			AddMenuAction("SS", "Create a new section", delegate()
 			{
 				Console.Write("Are you sure you want to create a new section to add to the system? (Y / N)");
 				input = Console.ReadLine();
@@ -48,27 +47,8 @@ namespace CourseMan.Interface
 					CreateNewSection();
 				}
 			});
-			AddSubMenu('T', "Enter test sub menu", subMenu);
-			AddMenuAction('L', "Logout", Logout);
-=======
-                String input = Console.ReadLine();
-                if (input == "Y" || input == "y")
-                {
-                    CreateNewCourse();
-                }
-            });
-			AddMenuAction("CS", "Create a new section", delegate()
-            {
-                Console.Write("Are you sure you want to create a new section to add to the system? (Y / N)");
-                String input = Console.ReadLine();
-                if(input == "Y" || input == "y")
-                {
-                    CreateNewSection();
-                }
-            });
 			AddSubMenu("T", "Enter test sub menu", subMenu);
 			AddMenuAction("L", "Logout", Logout);
->>>>>>> origin/master
 		}
 
 		public void ShowAvailableCourses()
