@@ -49,13 +49,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Application\Services\ScheduleService.cs" />
     <Compile Include="Domain\Course.cs" />
     <Compile Include="Domain\CourseSectionHandler.cs" />
     <Compile Include="Domain\Services\RegistrationService.cs" />
     <Compile Include="Domain\TestData.cs" />
     <Compile Include="Domain\User.cs" />
     <Compile Include="Domain\ValueObjects\CourseID.cs" />
-    <Compile Include="Domain\ValueObjects\Schedule.cs" />
+    <Compile Include="Application\Schedule.cs" />
     <Compile Include="Domain\ValueObjects\SectionID.cs" />
     <Compile Include="Interface\Admin.cs" />
     <Compile Include="Interface\Form1.cs">
@@ -125,7 +126,9 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Infrastructure\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

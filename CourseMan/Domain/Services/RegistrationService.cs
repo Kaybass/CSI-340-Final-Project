@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CourseMan.Domain
+namespace CourseMan.Domain.Services
 {
 	public class RegistrationService
 	{
@@ -45,17 +45,5 @@ namespace CourseMan.Domain
 			section.RegisteredStudents.Remove(studentId);
 		}
 
-		// Get the schedule of a student TODO: move this into a different place in the code.
-		public Schedule GetStudentSchedule(int studentId)
-		{
-			CourseSectionHandler csh = CourseSectionHandler.Instance;
-			
-			// Add all sections containing the given student.
-			Schedule schedule = new Schedule(studentId);
-			schedule.Sections.AddRange(csh.Sections.Values.Where(
-				section => section.IsStudentRegistered(studentId)));
-			
-			return schedule;
-		}
 	}
 }

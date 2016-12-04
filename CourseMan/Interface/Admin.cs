@@ -33,6 +33,7 @@ namespace CourseMan.Interface
                         break;
                     case "L":
                     case "l":
+                        KeepGoing = false;
                         break;
                     default:
                         Console.WriteLine("Incorrect input");

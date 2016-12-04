@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using CourseMan.Domain;
 using CourseMan.Interface;
+using CourseMan.Domain.Services;
+using CourseMan.Application;
+using CourseMan.Application.Services;
 
 namespace CourseMan
 {
@@ -18,7 +21,6 @@ namespace CourseMan
         static void Main()
         {
             // Some test code.
-
             //         Course c = new Course() {
             //	CourseID = new CourseID("CSI", 385),
             //	Name = "Operating Systems Architecture",
