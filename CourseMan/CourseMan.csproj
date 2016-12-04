@@ -52,6 +52,7 @@
     <Compile Include="Application\Services\ScheduleService.cs" />
     <Compile Include="Domain\Course.cs" />
     <Compile Include="Domain\CourseSectionHandler.cs" />
+    <Compile Include="Domain\Services\AuthenticationService.cs" />
     <Compile Include="Domain\Services\RegistrationService.cs" />
     <Compile Include="Domain\TestData.cs" />
     <Compile Include="Domain\User.cs" />
@@ -59,7 +60,12 @@
     <Compile Include="Application\ValueObjects\Schedule.cs" />
     <Compile Include="Domain\ValueObjects\MeetingInfo.cs" />
     <Compile Include="Domain\ValueObjects\SectionID.cs" />
+    <Compile Include="Infrastructure\IMenuItem.cs" />
+    <Compile Include="Infrastructure\SubMenu.cs" />
+    <Compile Include="Infrastructure\MenuAction.cs" />
     <Compile Include="Interface\Admin.cs" />
+    <Compile Include="Interface\Menus\LoginMenu.cs" />
+    <Compile Include="Interface\Menus\AdminConsole.cs" />
     <Compile Include="Interface\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -127,9 +133,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Infrastructure\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
