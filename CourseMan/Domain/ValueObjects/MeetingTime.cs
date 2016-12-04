@@ -43,6 +43,15 @@ namespace CourseMan.Domain.ValueObjects
 			return (other.endTime <= startTime || other.startTime >= endTime);
 		}
 
+        public override string ToString()
+        {
+            string output;
+
+            output = startTime.ToString() + " - " + endTime.ToString() + ", " + dayOfWeek.ToString();
+
+            return output;
+        }
+
 
         public DayOfWeek DayOfWeek
         {

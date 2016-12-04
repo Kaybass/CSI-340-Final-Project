@@ -17,7 +17,7 @@ namespace CourseMan.Domain
         private Dictionary<int, User> users;
         private Dictionary<CourseID, Course> courses;
         private Dictionary<SectionID, Section> sections;
-        
+
 
         private CourseSectionHandler()
 		{
@@ -137,6 +137,12 @@ namespace CourseMan.Domain
         {
             get { return sections; }
             set { sections = value; }
+        }
+
+        public int CurrentSystemUser
+        {
+            get { return CurrentSystemUser;  }
+            set { CurrentSystemUser = value;  }
         }
     }
 }
