@@ -24,7 +24,8 @@ namespace CourseMan
             {
                 AdminForm form = new AdminForm("meme");
                 this.Hide();
-                form.Show();
+                form.ShowDialog();
+                this.Show();
                 
             }
         }
