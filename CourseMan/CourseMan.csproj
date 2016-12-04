@@ -57,7 +57,9 @@
     <Compile Include="Domain\User.cs" />
     <Compile Include="Domain\ValueObjects\CourseID.cs" />
     <Compile Include="Application\ValueObjects\Schedule.cs" />
+    <Compile Include="Domain\ValueObjects\MeetingTimes.cs" />
     <Compile Include="Domain\ValueObjects\SectionID.cs" />
+    <Compile Include="Infrastructure\IRepository.cs" />
     <Compile Include="Interface\Admin.cs" />
     <Compile Include="Interface\Form1.cs">
       <SubType>Form</SubType>
@@ -126,9 +128,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Infrastructure\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -7,6 +7,15 @@ using CourseMan.Domain.ValueObjects;
 
 namespace CourseMan.Domain.Services
 {
+	public class RegistrationException : Exception
+	{
+		public RegistrationException(string message) :
+			base(message)
+		{
+		}
+	}
+
+
 	public class RegistrationService
 	{
 		public RegistrationService()
@@ -23,11 +32,11 @@ namespace CourseMan.Domain.Services
 
 			// Check if the student is already registered for this section.
 			if (section.RegisteredStudents.Contains(studentId))
-				throw new Exception("Error: student is already registed for this section!");
+				throw new RegistrationException("Error: student is already registed for this section!");
 
 			// Check if there are no empty seats.
 			if (section.IsFull)
-				throw new Exception("Error: no seats available for this section!");
+				throw new RegistrationException("Error: no seats available for this section!");
 
 			// TODO: Check for conflicting meeting times.
 

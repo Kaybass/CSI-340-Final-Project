@@ -34,6 +34,27 @@ namespace CourseMan.Domain
 		
 		public void AddSection(Section section)
 		{
+			// Does the instructor exist?
+			if (!users.ContainsKey(section.InstructorID))
+			{
+				throw new Exception("The instructor doesn't exist");
+			}
+			
+			// Does the course exist?
+			if (!courses.ContainsKey(section.CourseID))
+			{
+				throw new Exception("The course doesn't exist");
+			}
+
+			// Is the meeting times/room conflicting?
+			foreach (Section s in sections.Values)
+			{
+				if (s.MeetingInfo.ConflictsWith(section.MeetingInfo))
+				{
+					throw new Exception("This section's meeting times conflict with another's");
+				}
+			}
+
 			sections[section.SectionID] = section;
 		}
 		
@@ -42,10 +63,37 @@ namespace CourseMan.Domain
 			users[user.UserID] = user;
 		}
 
-		public void RemoveCourse(Course course)
+		public void RemoveCourseAndItsSections(Course course)
 		{
 			courses.Remove(course.CourseID);
 
+			// Remove all sections of this course.
+			foreach (var section in sections.Where(kv =>
+				kv.Key.CourseID == course.CourseID).ToList())
+			{
+				sections.Remove(section.Key);
+			}
+		}
+
+		public Course GetCourse(CourseID courseId)
+		{
+			if (courses.ContainsKey(courseId))
+				return courses[courseId];
+			return null;
+		}
+
+		public Section GetSection(SectionID sectionId)
+		{
+			if (sections.ContainsKey(sectionId))
+				return sections[sectionId];
+			return null;
+		}
+
+		public User GetUser(int userId)
+		{
+			if (users.ContainsKey(userId))
+				return users[userId];
+			return null;
 		}
 
 

@@ -35,8 +35,8 @@ namespace CourseMan.Domain.ValueObjects
                     dateTime.TimeOfDay <= endTime);
         }
 
-		// Return true if the given meeting time interfereces with this one.
-		public bool InterferesWith(MeetingTime other)
+		// Return true if the given meeting time conflicts with this one (overlaps in time).
+		public bool ConflictsWith(MeetingTime other)
 		{
 			return (other.endTime <= startTime || other.startTime >= endTime);
 		}

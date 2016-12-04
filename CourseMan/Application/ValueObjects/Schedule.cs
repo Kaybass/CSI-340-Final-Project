@@ -29,12 +29,7 @@ namespace CourseMan.Application.ValueObjects
         // Check if any sections are currently meeting during the given date-time.
         public bool IsBusyAt(DateTime dateTime)
         {
-            foreach (Section section in sections)
-            {
-                if (section.IsMeetingAt(dateTime))
-                    return true;
-            }
-            return false;
+			return sections.Exists(section => section.IsMeetingAt(dateTime));
         }
 		
 

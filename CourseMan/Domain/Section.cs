@@ -10,25 +10,22 @@ namespace CourseMan.Domain
     public class Section
     {
         private SectionID sectionId;
-        private Room room;
+        private MeetingInfo meetingInfo;
 		private int maxSeats;
-        private List<MeetingTime> meetingTimes;
 		private HashSet<int> registeredStudentIds;
 		private int instructorId;
 
 
         public Section()
         {
-            meetingTimes = new List<MeetingTime>();
+            meetingInfo = new MeetingInfo();
 			registeredStudentIds = new HashSet<int>();
         }
 
         public Section(SectionID id, Room room, List<MeetingTime> times)
         {
-            this.sectionId = id;
-            this.room = room;
-            this.meetingTimes = new List<MeetingTime>();
-			this.meetingTimes.AddRange(times);
+            sectionId = id;
+            meetingInfo = new MeetingInfo(room, times);
         }
 
 
@@ -69,8 +66,8 @@ namespace CourseMan.Domain
 
         public Room Room
         {
-            get { return room; }
-            set { room = value; }
+            get { return meetingInfo.Room; }
+            set { meetingInfo.Room = value; }
         }
 
         public int InstructorID
@@ -79,9 +76,9 @@ namespace CourseMan.Domain
             set { instructorId = value; }
         }
 
-        public List<MeetingTime> MeetingTimes
+        public MeetingInfo MeetingInfo
         {
-            get { return meetingTimes; }
+            get { return meetingInfo; }
         }
 
         public ISet<int> RegisteredStudents
