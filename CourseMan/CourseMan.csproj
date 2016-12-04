@@ -64,8 +64,8 @@
     <Compile Include="Infrastructure\SubMenu.cs" />
     <Compile Include="Infrastructure\MenuAction.cs" />
     <Compile Include="Interface\Admin.cs" />
-    <Compile Include="Interface\Menus\LoginMenu.cs" />
     <Compile Include="Interface\Menus\AdminConsole.cs" />
+    <Compile Include="Interface\Menus\LoginMenu.cs" />
     <Compile Include="Interface\Form1.cs">
       <SubType>Form</SubType>
     </Compile>

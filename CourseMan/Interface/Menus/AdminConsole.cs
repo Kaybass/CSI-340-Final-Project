@@ -116,7 +116,7 @@ namespace CourseMan.Interface
 
         public void CreateNewSection()
         {
-            //Stub
+            //
         }
 
         public void Logout()
