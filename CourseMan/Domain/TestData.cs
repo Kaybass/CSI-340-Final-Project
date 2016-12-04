@@ -44,6 +44,7 @@ namespace CourseMan.Domain
             meetingTimes.Add(new MeetingTime(DayOfWeek.Tuesday, new TimeSpan(02, 00, 0), new TimeSpan(11, 15, 0)));
             meetingTimes.Add(new MeetingTime(DayOfWeek.Thursday, new TimeSpan(03, 00, 0), new TimeSpan(11, 15, 0)));
             Section z = new Section(new SectionID("CSI", 340, 01), new Room("Wick", 101), meetingTimes);
+			z.InstructorID = b.UserID;
 
             csh.AddSection(z);
         }
