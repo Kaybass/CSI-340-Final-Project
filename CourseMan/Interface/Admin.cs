@@ -25,7 +25,7 @@ namespace CourseMan.Interface
 
             while (KeepGoing)
             {
-                Console.WriteLine("Welcome to the admin console type:\nC to see available Courses in a list\nS to create section\nL to logout");
+                Console.WriteLine("Welcome to the admin console type:\nC to see available Courses in a list.\nS to see availbe Sections in a list.\nCourse to create new Course.\nSection to create new Section.\nL to logout");
                 string Input = Console.ReadLine();
 
                 switch (Input)
@@ -42,6 +42,15 @@ namespace CourseMan.Interface
                         break;
                     case "S":
                     case "s":
+                        foreach(KeyValuePair<SectionID, Section> p in CourseSectionHandler.Instance.Sections)
+                        {
+                            Console.WriteLine("SectionID:{0}\nMax Seats:{1}\nInsructor ID: {2}", p.Value.SectionID, p.Value.MaxSeats, p.Value.InstructorID);
+
+                            foreach(MeetingTime m in p.Value.MeetingInfo.Times)
+                            {
+                                Console.WriteLine("Meeting: {0} from {1} until {2}", m.DayOfWeek, m.StartTime, m.EndTime);
+                            }
+                        }
                         break;
                     case "L":
                     case "l":
