@@ -25,9 +25,9 @@ namespace CourseMan.Interface
 
 
 			Text = "Welcome to the CourseMan! Please login to continue.";
-			AddMenuAction('L', "Log In", PromptLogin);
-			AddMenuAction('A', "About", ShowAboutInfo);
-			AddExitItem('Q', "Quit");
+			AddMenuAction("L", "Log In", PromptLogin);
+			AddMenuAction("A", "About", ShowAboutInfo);
+			AddExitItem("Q", "Quit");
 		}
 
 		public void PromptLogin()

@@ -10,6 +10,9 @@ using CourseMan.Application.ValueObjects;
 
 namespace CourseMan.Application.Services
 {
+	// Service object used to gather scheduling/timing information, including 
+	// creating objects for student and instructor schedules, and determining
+	// when rooms are in use at a given time.
 	public class ScheduleService
 	{
 		public ScheduleService()

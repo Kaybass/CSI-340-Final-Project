@@ -8,15 +8,16 @@ using CourseMan.Domain.ValueObjects;
 
 namespace CourseMan.Domain
 {
+	// Services class which provides a facade to the repositories of
+	// users, courses, and sections.
     public class CourseSectionHandler
     {
+        private static CourseSectionHandler instance = null;
+
         private Dictionary<int, User> users;
-
         private Dictionary<CourseID, Course> courses;
-
         private Dictionary<SectionID, Section> sections;
 
-        private static CourseSectionHandler instance = null;
 
         private CourseSectionHandler()
 		{

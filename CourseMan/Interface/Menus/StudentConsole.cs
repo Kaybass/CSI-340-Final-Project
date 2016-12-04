@@ -18,10 +18,10 @@ namespace CourseMan.Interface
 
             // Setup the admin console menu.
             Text = "Welcome to the Student console!";
-            AddMenuAction('C', "See available sections", ShowAllSections);
-            AddMenuAction('S', "See your schedule", ShowSchedule);
-            AddMenuAction('R', "Register for a section, ", RegisterForSection);
-            AddMenuAction('L', "Logout", Logout);
+            AddMenuAction("C", "See available sections", ShowAllSections);
+            AddMenuAction("S", "See your schedule", ShowSchedule);
+            AddMenuAction("R", "Register for a section, ", RegisterForSection);
+            AddMenuAction("L", "Logout", Logout);
         }
 
         public void ShowAllSections()

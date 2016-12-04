@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace CourseMan.Domain.ValueObjects
 {
+	// Value object used to identify sections.
 	public struct SectionID
 	{
-        private CourseID courseId;
+        private CourseID courseId; // The course of which this section is an instance.
         private int sectionNumber; // 2-digit section number (unique per course).
 
 
@@ -25,6 +26,8 @@ namespace CourseMan.Domain.ValueObjects
         }
 
 
+		// Convert a course ID to a string, combining the major code, course
+		// number, and section number separated by dashes (ex: CSI-340-01)
         public override string ToString()
         {
             return String.Format("{0}-{1,2:00}", courseId.ToString(), sectionNumber);
