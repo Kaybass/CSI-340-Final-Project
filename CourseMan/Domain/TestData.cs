@@ -39,7 +39,9 @@ namespace CourseMan.Domain
 
             csh.AddCourse(softwareSpecialities);
 
-            List<MeetingTime> meetingTimes = new List<MeetingTime>(); // Don't know how to initialize MeetingTime. What is value TimeSpan?
+            List<MeetingTime> meetingTimes = new List<MeetingTime>();
+            meetingTimes.Add(new MeetingTime(DayOfWeek.Tuesday, new TimeSpan(02, 00, 0), new TimeSpan(11, 15, 0)));
+            meetingTimes.Add(new MeetingTime(DayOfWeek.Thursday, new TimeSpan(03, 00, 0), new TimeSpan(11, 15, 0)));
             Section z = new Section(new SectionID("CSI", 340, 01), new Room("Wick", 101), meetingTimes);
 
             csh.AddSection(z);
