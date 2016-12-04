@@ -6,19 +6,23 @@ using System.Threading.Tasks;
 
 namespace CourseMan.Domain.ValueObjects
 {
+	// Entity representing a room where a section meets.
+	// Rooms must be entities because two sections cannot be
+	// meeting in the same room at the same time.
     public struct Room
     {
         private string buildingName;
         private int roomNumber;
 
-
+		
+		// Create a room given a building name and room number.
         public Room(string buildingName, int roomNumber)
         {
             this.buildingName = buildingName;
             this.roomNumber = roomNumber;
         }
 
-
+		// Convert a room to a string, containing the building name and room number.
         public override string ToString()
         {
             return (buildingName + " " + roomNumber);

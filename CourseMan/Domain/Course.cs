@@ -7,16 +7,18 @@ using CourseMan.Domain.ValueObjects;
 
 namespace CourseMan.Domain
 {
+	// Entity class representing a course which that a school offers.
+	// An instances of a course offering is called a Section.
     public class Course
     {
         private CourseID courseId;
         private string name;
         private string description;
 
-
+		
+		// Default Constructor
         public Course()
         {
-            // Default Constructor
         }
 
         public Course(CourseID id, string name, string description)

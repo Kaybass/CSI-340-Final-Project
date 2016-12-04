@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 
 namespace CourseMan.Domain.ValueObjects
 {
+	// Aggregate object representing the information about when
+	// and where a section meets.
 	public class MeetingInfo
 	{
         private List<MeetingTime> times;
@@ -17,29 +19,44 @@ namespace CourseMan.Domain.ValueObjects
             times = new List<MeetingTime>();
 		}
 		
+		// Construct a MeetingInfo with a room, and no times.
+		public MeetingInfo(Room room)
+		{
+			this.room = room;
+            this.times = new List<MeetingTime>();
+		}
+		
+		// Construct a MeetingInfo with a room and a list of meeting times.
 		public MeetingInfo(Room room, List<MeetingTime> times)
 		{
 			this.room = room;
             this.times = new List<MeetingTime>();
 			this.times.AddRange(times);
 		}
-
-
-		void AddTime(MeetingTime time)
-		{
-			times.Add(time);
-		}
 		
+		
+		// Add a meeting time, given the day-of-week and start/end times.
 		void Add(DayOfWeek dayOfWeek, int startTimeHours, int startTimeMinutes,
 			int endTimeHours, int endTimeMinutes)
 		{
-			times.Add(new MeetingTime(dayOfWeek, startTimeHours,
+			AddTime(new MeetingTime(dayOfWeek, startTimeHours,
 				startTimeMinutes, endTimeHours, endTimeMinutes));
 		}
 		
+		// Add a meeting time, given the day-of-week and start/end times.
 		void Add(DayOfWeek dayOfWeek, TimeSpan startTime, TimeSpan endTime)
 		{
-			times.Add(new MeetingTime(dayOfWeek, startTime, endTime));
+			AddTime(new MeetingTime(dayOfWeek, startTime, endTime));
+		}
+
+		// Add a new meeting time.
+		void AddTime(MeetingTime time)
+		{
+			// Make sure it doesn't conflict with the existing times.
+			if (times.Exists(t => t.ConflictsWith(time)))
+				throw new Exception("Conflicting meeting times within a section");
+
+			times.Add(time);
 		}
 		
         // Return whether this is currently meeting during the given date-time.

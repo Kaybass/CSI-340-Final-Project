@@ -6,9 +6,29 @@ using System.Threading.Tasks;
 
 namespace CourseMan.Domain
 {
-    public enum UserType { Student, Instructor, Administrator };
-    public enum Department { CompSci, Engineering, Psychology, English, History }
+	// The type of users. Students register for courses. Instructors teach
+	// courses. And  Administrators manage the CourseMan system, adding and
+	// removing sections & courses.
+    public enum UserType
+	{
+		Student,
+		Instructor,
+		Administrator
+	};
+
+	// Possible departments that a user can belong to.
+	// This is equivilent to a major.
+	public enum Department
+	{
+		CompSci,
+		Engineering,
+		Psychology,
+		English,
+		History
+	}
 	
+	// Entity class representing a user (student, instructor, or admin) 
+	// who is a part of the school system, identified by a user ID number.
     public class User
     {
         private int userId;

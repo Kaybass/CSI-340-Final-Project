@@ -7,13 +7,16 @@ using CourseMan.Domain.ValueObjects;
 
 namespace CourseMan.Domain
 {
-    class TestData
+	// Class used to populate the system with some initial test data,
+	// including users (students, instructors, and admins), courses, and
+	// sections.
+    public class TestData
     {
         public TestData()
         {
-
         }
-
+		
+		// Populate initial test data to the system.
         public void addTheDataToTheThing()
         {
             CourseSectionHandler csh = CourseSectionHandler.Instance;

@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 
 namespace CourseMan.Domain.Services
 {
+	// Service singleton object used for authentication. Through this 
+	// interface, you can log in and log out as a user.
 	public class AuthenticationService
 	{
         private static AuthenticationService instance = null;
@@ -13,12 +15,14 @@ namespace CourseMan.Domain.Services
 		private int loggedInUserId;
 
 
+		// Constructor is private because this is meant to be a singleton.
 		private AuthenticationService()
 		{
 			loggedInUserId = -1;
 		}
-
-
+		
+		// Attempt to log in as a user, provided a username and password,
+		// returns true if the login was successful.
 		public bool LogIn(string username, string password)
 		{
 			// Must log out first.
@@ -38,6 +42,7 @@ namespace CourseMan.Domain.Services
 			return false;
 		}
 
+		// Log the current user out. This must be done in order to log in again.
 		public void LogOut()
 		{
 			loggedInUserId = -1;
@@ -49,12 +54,10 @@ namespace CourseMan.Domain.Services
 			get { return (loggedInUserId != -1); }
 		}
 
+		// Retreive the user who is currently logged in, or null if no one is.
 		public User LoggedInUser
 		{
-			get
-			{
-				return CourseSectionHandler.Instance.GetUser(loggedInUserId);
-			}
+			get { return CourseSectionHandler.Instance.GetUser(loggedInUserId); }
 		}
 
 		public static AuthenticationService Instance

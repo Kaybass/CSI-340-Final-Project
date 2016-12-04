@@ -1,20 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CourseMan.Infrastructure
 {
 	// A menu item which will enter a sub-menu.
-	// The composite part of the Composite Pattern
+	// This is the composite part of the Composite Pattern.
 	public class SubMenu : IMenuItem
 	{
-		private string text;
+		private string text; // Test displayed before the list of items.
 		private List<Option> items;
 		private bool isRunning;
 
-
+		// Simple class internally representing a menu item, with its
+		// corresponding name and letter shortcut.
 		private class Option
 		{
 			public char Letter { get; set; }
@@ -36,6 +35,7 @@ namespace CourseMan.Infrastructure
 			this.isRunning = false;
 		}
 
+		// Create a sub-menu given its text displayed above the list of items.
 		public SubMenu(string text)
 		{
 			this.text = text;
@@ -43,12 +43,14 @@ namespace CourseMan.Infrastructure
 			this.isRunning = false;
 		}
 
+		// Open the sub-menu, letting the user choose from its items.
 		public void PerformPressAction()
 		{
 			Console.Clear();
 			Console.WriteLine();
 			isRunning = true;
 
+			// Allow menu interactions repeatedly, until the menu is exited.
 			while (isRunning)
 			{
 				Console.WriteLine(text);
@@ -104,13 +106,16 @@ namespace CourseMan.Infrastructure
 			items.Add(new Option(letter, name, item));
 		}
 
-
+		// Exit the menu, stopping it from running. If a previous menu
+		// entered into this sub-menu, then the interface will return
+		// to the previous menu.
 		public void ExitMenu()
 		{
 			isRunning = false;
 			Console.Clear();
 		}
 
+		// Enter into a sub-menu, running it on top of this one until it is exited.
 		public void EnterSubMenu(SubMenu subMenu)
 		{
 			subMenu.PerformPressAction();
