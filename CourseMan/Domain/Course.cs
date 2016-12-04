@@ -16,7 +16,15 @@ namespace CourseMan.Domain
 
         public Course()
         {
+            // Default Constructor
+        }
 
+        public Course(CourseID cID, int iId, string cName, string cDescription)
+        {
+            courseId = cID;
+            instructorId = iId;
+            name = cName;
+            description = cDescription;
         }
 
         public override string ToString()
