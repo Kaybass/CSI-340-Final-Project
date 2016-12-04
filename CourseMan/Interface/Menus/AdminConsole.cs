@@ -19,17 +19,17 @@ namespace CourseMan.Interface
 		{
 			// Create a test menu.
 			subMenu = new SubMenu("Example Sub Menu");
-			subMenu.AddMenuAction('H', "Hello", delegate()
+			subMenu.AddMenuAction("H", "Hello", delegate()
 			{
 				Console.WriteLine("Hello, World!");
 			});
-			subMenu.AddExitItem('B', "Back");
+			subMenu.AddExitItem("B", "Back");
 
 			// Setup the admin console menu.
 			Text = "Welcome to the admin console!";
-			AddMenuAction('c', "See available courses", ShowAvailableCourses);
-            AddMenuAction('s', "See available sections", ShowAvailableSections);
-            AddMenuAction('C', "Create a new course", delegate ()
+			AddMenuAction("C", "See available courses", ShowAvailableCourses);
+            AddMenuAction("S", "See available sections", ShowAvailableSections);
+            AddMenuAction("CC", "Create a new course", delegate ()
             {
                 Console.Write("Are you sure you want to create a new course to add to the system?");
                 String input = Console.ReadLine();
@@ -38,7 +38,7 @@ namespace CourseMan.Interface
                     CreateNewCourse();
                 }
             });
-			AddMenuAction('S', "Create a new section", delegate()
+			AddMenuAction("CS", "Create a new section", delegate()
             {
                 Console.Write("Are you sure you want to create a new section to add to the system? (Y / N)");
                 String input = Console.ReadLine();
@@ -47,8 +47,8 @@ namespace CourseMan.Interface
                     CreateNewSection();
                 }
             });
-			AddSubMenu('T', "Enter test sub menu", subMenu);
-			AddMenuAction('L', "Logout", Logout);
+			AddSubMenu("T", "Enter test sub menu", subMenu);
+			AddMenuAction("L", "Logout", Logout);
 		}
 
 		public void ShowAvailableCourses()

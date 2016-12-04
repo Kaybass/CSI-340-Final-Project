@@ -16,13 +16,13 @@ namespace CourseMan.Infrastructure
 		// corresponding name and letter shortcut.
 		private class Option
 		{
-			public char Letter { get; set; }
+			public string Mnemonic { get; set; }
 			public string Name { get; set; }
 			public IMenuItem Item { get; set; }
 
-			public Option(char letter, string name, IMenuItem item)
+			public Option(string mnemonic, string name, IMenuItem item)
 			{
-				this.Letter = letter;
+				this.Mnemonic = mnemonic;
 				this.Name = name;
 				this.Item = item;
 			}
@@ -57,25 +57,22 @@ namespace CourseMan.Infrastructure
 
 				// Print out each menu item.
 				for (int i = 0; i < items.Count; i++)
-					Console.WriteLine("{0}: {1}", char.ToUpper(items[i].Letter), items[i].Name);
+					Console.WriteLine("{0}: {1}", items[i].Mnemonic, items[i].Name);
 
-				// Prompt the user for an item number.
+				// Prompt the user for an item.
 				Console.Write("> ");
 				string input = Console.ReadLine();
 				Console.WriteLine();
 
-				if (input.Length > 0)
-				{
-					// Find an option with a matching letter.
-					Option option = items.FirstOrDefault(it =>
-						char.ToLower(it.Letter) == char.ToLower(input[0]));
+				// Find an option with the matching mneumonic.
+				Option option = items.FirstOrDefault(it =>
+					String.Compare(it.Mnemonic, input, true) == 0);
 
-					// Perform the option's action if it exists.
-					if (option != null)
-						option.Item.PerformPressAction();
-					else
-						Console.WriteLine("Invalid option '{0}'!", input);
-				}
+				// Perform the option's action if it exists.
+				if (option != null)
+					option.Item.PerformPressAction();
+				else
+					Console.WriteLine("Invalid option '{0}'!", input);
 
 				if (isRunning)
 					Console.WriteLine();
@@ -83,27 +80,27 @@ namespace CourseMan.Infrastructure
 		}
 		
 		// Add a menu item which will enter a sub-menu.
-		public void AddSubMenu(char letter, string name, SubMenu subMenu)
+		public void AddSubMenu(string mnemonic, string name, SubMenu subMenu)
 		{
-			AddMenuItem(letter, name, subMenu);
+			AddMenuItem(mnemonic, name, subMenu);
 		}
 		
 		// Add a menu item which will perform a single action.
-		public void AddMenuAction(char letter, string name, MenuActionDelegate action)
+		public void AddMenuAction(string mnemonic, string name, MenuActionDelegate action)
 		{
-			AddMenuItem(letter, name, new MenuAction(action));
+			AddMenuItem(mnemonic, name, new MenuAction(action));
 		}
 
 		// Add a menu item which exits this sub-menu.
-		public void AddExitItem(char letter, string name)
+		public void AddExitItem(string mnemonic, string name)
 		{
-			AddMenuAction(letter, name, this.ExitMenu);
+			AddMenuAction(mnemonic, name, this.ExitMenu);
 		}
 		
 		// Add a menu item.
-		public void AddMenuItem(char letter, string name, IMenuItem item)
+		public void AddMenuItem(string mnemonic, string name, IMenuItem item)
 		{
-			items.Add(new Option(letter, name, item));
+			items.Add(new Option(mnemonic, name, item));
 		}
 
 		// Exit the menu, stopping it from running. If a previous menu
