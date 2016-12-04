@@ -17,7 +17,6 @@ namespace CourseMan.Domain
         private Dictionary<SectionID, Section> sections;
 
         private static CourseSectionHandler instance = null;
-        
 
         private CourseSectionHandler()
 		{
@@ -137,6 +136,12 @@ namespace CourseMan.Domain
         {
             get { return sections; }
             set { sections = value; }
+        }
+
+        public int CurrentSystemUser
+        {
+            get { return CurrentSystemUser;  }
+            set { CurrentSystemUser = value;  }
         }
     }
 }

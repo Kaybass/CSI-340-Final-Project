@@ -28,23 +28,27 @@ namespace CourseMan.Interface
 			// Setup the admin console menu.
 			Text = "Welcome to the admin console!";
 			AddMenuAction('C', "See available courses", ShowAvailableCourses);
-			AddMenuAction('S', "Create a new section", delegate()
-			{
-				// NOTE: Example of defining a function inline using a delegate.
-				Console.Write("TODO");
-			});
+			AddMenuAction('S', "Create a new section", CreateSection);
 			AddSubMenu('T', "Enter test sub menu", subMenu);
 			AddMenuAction('L', "Logout", Logout);
 		}
 
 		public void ShowAvailableCourses()
 		{
+            Console.Clear();
             foreach(KeyValuePair<CourseID, Course> p in CourseSectionHandler.Instance.Courses)
             {
                 Console.WriteLine("CourseID:{0}\nCourseName:{1}\nCourseDescription:{2}",
 					p.Value.CourseID, p.Value.Name, p.Value.Description);
             }
+            Console.ReadLine();
+            Console.Clear();
 		}
+
+        public void CreateSection()
+        {
+
+        }
 
 		public void Logout()
 		{
