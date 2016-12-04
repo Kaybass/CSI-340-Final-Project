@@ -35,7 +35,7 @@ namespace CourseMan.Domain
             csh.AddUser(g);
             csh.AddUser(h);
 
-            Course softwareSpecialities = new Course(new CourseID("CSI", 340), 0002, "Software Specialities", "A class in domain-driven design");
+            Course softwareSpecialities = new Course(new CourseID("CSI", 340), "Software Specialities", "A class in domain-driven design");
 
             csh.AddCourse(softwareSpecialities);
 

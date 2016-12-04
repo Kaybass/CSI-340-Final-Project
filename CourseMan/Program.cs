@@ -5,6 +5,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using CourseMan.Domain;
+using CourseMan.Domain.Services;
+using CourseMan.Application;
+using CourseMan.Application.Services;
 
 namespace CourseMan
 {
@@ -21,14 +24,14 @@ namespace CourseMan
             Course c = new Course() {
 				CourseID = new CourseID("CSI", 385),
 				Name = "Operating Systems Architecture",
-				Description = "Write the FAT12 with Josh!",
-				InstructorID = 0xBAD,
+				Description = "Write the FAT12!",
 			};
             
             Section s = new Section() {
 				SectionID = new SectionID(c.CourseID, 2),
 				MaxSeats = 20,
 				Room = new Room("Wick", 101),
+				InstructorID = 0xBAD,
 			};
             s.MeetingTimes.Add(new MeetingTime(DayOfWeek.Tuesday, 12,30, 1,45));
 
@@ -51,12 +54,15 @@ namespace CourseMan
 			RegistrationService registrationService = new RegistrationService();
 
 			registrationService.Register(u.UserID, s.SectionID);
+			
+			ScheduleService scheduleService = new ScheduleService();
+			Schedule joshSchedule = scheduleService.GetInstructerSchedule(0xBAD);
+			//joshSchedule.IsBusyAt(DateTime.Now);
 
-			//CourseSectionHandler.Instance.Courses;
 
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            System.Windows.Forms.Application.EnableVisualStyles();
+            System.Windows.Forms.Application.SetCompatibleTextRenderingDefault(false);
+            System.Windows.Forms.Application.Run(new Form1());
         }
     }
 }

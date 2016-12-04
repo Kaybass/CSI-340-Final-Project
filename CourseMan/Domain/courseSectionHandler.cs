@@ -41,6 +41,12 @@ namespace CourseMan.Domain
 			users[user.UserID] = user;
 		}
 
+		public void RemoveCourse(Course course)
+		{
+			courses.Remove(course.CourseID);
+
+		}
+
 
 		public static CourseSectionHandler Instance
 		{

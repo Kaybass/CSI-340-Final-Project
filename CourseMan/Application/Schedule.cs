@@ -3,18 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CourseMan.Domain;
 
-namespace CourseMan.Domain
+namespace CourseMan.Application
 {
     public class Schedule
     {
-		private int studentId;
+		private int userId;
         private List<Section> sections;
 
 
-        public Schedule(int studentId)
+        public Schedule(int userId)
         {
-			this.studentId = studentId;
+			this.userId = userId;
 			this.sections = new List<Section>();
         }
 
@@ -31,10 +32,10 @@ namespace CourseMan.Domain
         }
 		
 
-        public int StudentID
+        public int UserId
         {
-            get { return studentId; }
-            set { studentId = value; }
+            get { return userId; }
+            set { userId = value; }
         }
 
         public List<Section> Sections

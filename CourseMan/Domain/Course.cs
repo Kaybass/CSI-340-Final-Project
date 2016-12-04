@@ -9,7 +9,6 @@ namespace CourseMan.Domain
     public class Course
     {
         private CourseID courseId;
-        private int instructorId;
         private string name;
         private string description;
 
@@ -19,12 +18,11 @@ namespace CourseMan.Domain
             // Default Constructor
         }
 
-        public Course(CourseID cID, int iId, string cName, string cDescription)
+        public Course(CourseID id, string name, string description)
         {
-            courseId = cID;
-            instructorId = iId;
-            name = cName;
-            description = cDescription;
+            this.courseId = id;
+            this.name = name;
+            this.description = description;
         }
 
         public override string ToString()
@@ -37,12 +35,6 @@ namespace CourseMan.Domain
         {
             get { return courseId; }
             set { courseId = value; }
-        }
-
-        public int InstructorID
-        {
-            get { return instructorId; }
-            set { instructorId = value; }
         }
 
         public string Name

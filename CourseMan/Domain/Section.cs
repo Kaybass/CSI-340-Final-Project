@@ -10,9 +10,10 @@ namespace CourseMan.Domain
     {
         private SectionID sectionId;
         private Room room;
+		private int maxSeats;
         private List<MeetingTime> meetingTimes;
 		private HashSet<int> registeredStudentIds;
-		private int maxSeats;
+		private int instructorId;
 
 
         public Section()
@@ -21,11 +22,12 @@ namespace CourseMan.Domain
 			registeredStudentIds = new HashSet<int>();
         }
 
-        public Section(SectionID sId, Room sRoom, List<MeetingTime> sTimes)
+        public Section(SectionID id, Room room, List<MeetingTime> times)
         {
-            sectionId = sId;
-            room = sRoom;
-            meetingTimes = new List<MeetingTime>();
+            this.sectionId = id;
+            this.room = room;
+            this.meetingTimes = new List<MeetingTime>();
+			this.meetingTimes.AddRange(times);
         }
 
 
@@ -35,7 +37,7 @@ namespace CourseMan.Domain
 			return registeredStudentIds.Contains(studentId);
 		}
 
-        // Check if the section is currently meeting during the given date-time.
+        // Return whether the section is currently meeting during the given date-time.
         public bool IsMeetingAt(DateTime dateTime)
         {
             foreach (MeetingTime meetigTime in meetingTimes)
@@ -68,6 +70,12 @@ namespace CourseMan.Domain
         {
             get { return room; }
             set { room = value; }
+        }
+
+        public int InstructorID
+        {
+            get { return instructorId; }
+            set { instructorId = value; }
         }
 
         public List<MeetingTime> MeetingTimes
