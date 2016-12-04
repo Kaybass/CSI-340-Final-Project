@@ -17,12 +17,22 @@ namespace CourseMan.Domain
 		private string firstName;
 		private string lastName;
         private UserType type;
-        private Department department; // department = major
+        private Department department; // department == major
+
 
         public User()
         {
-            // Constructor
+            // Default constructor
         }
+		
+        public User(int id, string username, string password, UserType type, Department department)
+		{
+            this.userId = id;
+            this.username = username;
+            this.password = password;
+			this.type = type;
+			this.department = department;
+		}
 
         public User(int id, string username, string password, string type, string department)
         {

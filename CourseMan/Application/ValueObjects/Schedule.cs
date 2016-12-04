@@ -42,7 +42,6 @@ namespace CourseMan.Application.ValueObjects
         public List<Section> Sections
         {
             get { return sections; }
-            set { sections = value; }
         }
     }
 }

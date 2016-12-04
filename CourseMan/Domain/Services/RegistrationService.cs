@@ -18,9 +18,13 @@ namespace CourseMan.Domain.Services
 
 	public class RegistrationService
 	{
+        private static RegistrationService instance = null;
+
+
 		public RegistrationService()
 		{
 		}
+
 
 		public void Register(int studentId, SectionID sectionId)
 		{
@@ -57,5 +61,15 @@ namespace CourseMan.Domain.Services
 			section.RegisteredStudents.Remove(studentId);
 		}
 
+		
+		public static RegistrationService Instance
+		{
+			get
+			{
+				if (instance == null)
+					instance = new RegistrationService();
+				return instance;
+			}
+		}
 	}
 }

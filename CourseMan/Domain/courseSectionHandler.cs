@@ -29,11 +29,23 @@ namespace CourseMan.Domain
 
 		public void AddCourse(Course course)
 		{
+			// Does this course already exist?
+			if (!courses.ContainsKey(course.CourseID))
+			{
+				throw new Exception("There is already a course with that ID");
+			}
+			
 			courses[course.CourseID] = course;
 		}
 		
 		public void AddSection(Section section)
 		{
+			// Does this section already exist?
+			if (!sections.ContainsKey(section.SectionID))
+			{
+				throw new Exception("There is already a section with that ID");
+			}
+
 			// Does the instructor exist?
 			if (!users.ContainsKey(section.InstructorID))
 			{
