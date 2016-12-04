@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CourseMan.Domain
+namespace CourseMan.Domain.ValueObjects
 {
     public struct Room
     {
@@ -23,6 +23,30 @@ namespace CourseMan.Domain
         {
             return (buildingName + " " + roomNumber);
         }
+
+		public override bool Equals(object obj)
+		{
+			return (obj is Room && (Room) obj == this);
+		}
+
+		public override int GetHashCode()
+		{
+			int hash = 13;
+			hash = (hash * 7) + buildingName.GetHashCode();
+			hash = (hash * 7) + roomNumber;
+			return hash;
+		}
+
+		public static bool operator ==(Room a, Room b)
+		{
+			return (a.buildingName == b.buildingName &&
+					a.roomNumber == b.roomNumber);
+		}
+
+		public static bool operator !=(Room a, Room b)
+		{
+			return !(a == b);
+		}
 
 
         public string BuildingName

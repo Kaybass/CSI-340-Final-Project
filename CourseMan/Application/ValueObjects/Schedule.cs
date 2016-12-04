@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using CourseMan.Domain;
 
-namespace CourseMan.Application
+namespace CourseMan.Application.ValueObjects
 {
     public class Schedule
     {
@@ -19,6 +19,12 @@ namespace CourseMan.Application
 			this.sections = new List<Section>();
         }
 
+		// Return a list of scheduled sections for the given day of the week.
+		public IEnumerable<Section> GetSectionsOnDayOfWeek(DayOfWeek dayOfWeek)
+		{
+			return sections.Where(section => section.MeetingTimes
+				.Exists(time => time.DayOfWeek == dayOfWeek));
+		}
 
         // Check if any sections are currently meeting during the given date-time.
         public bool IsBusyAt(DateTime dateTime)

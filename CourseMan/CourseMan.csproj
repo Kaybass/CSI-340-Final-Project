@@ -53,7 +53,7 @@
     <Compile Include="Domain\TestData.cs" />
     <Compile Include="Domain\User.cs" />
     <Compile Include="Domain\ValueObjects\CourseID.cs" />
-    <Compile Include="Application\Schedule.cs" />
+    <Compile Include="Application\ValueObjects\Schedule.cs" />
     <Compile Include="Domain\ValueObjects\SectionID.cs" />
     <Compile Include="Interface\Form1.cs">
       <SubType>Form</SubType>

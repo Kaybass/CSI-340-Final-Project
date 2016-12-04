@@ -14,48 +14,50 @@ namespace CourseMan.Domain
         private int userId;
         private string username;
         private string password;
+		private string firstName;
+		private string lastName;
         private UserType type;
-        private Department department; // department ≈ major
+        private Department department; // department = major
 
         public User()
         {
             // Constructor
         }
 
-        public User(int uId, string uName, string uPass, string uType, string uDepartment)
+        public User(int id, string username, string password, string type, string department)
         {
-            userId = uId;
-            username = uName;
-            password = uPass;
-            switch(uType)
+            this.userId = id;
+            this.username = username;
+            this.password = password;
+            switch (type)
             {
                 case "Student":
-                    type = UserType.Student;
+                    this.type = UserType.Student;
                     break;
                 case "Instructor":
-                    type = UserType.Instructor;
+                    this.type = UserType.Instructor;
                     break;
                 case "Administrator":
-                    type = UserType.Administrator;
+                    this.type = UserType.Administrator;
                     break;
             }
 
-            switch(uDepartment)
+            switch (department)
             {
                 case "CompSci":
-                    department = Department.CompSci;
+                    this.department = Department.CompSci;
                     break;
                 case "Engineering":
-                    department = Department.Engineering;
+                    this.department = Department.Engineering;
                     break;
                 case "Psychology":
-                    department = Department.Psychology;
+                    this.department = Department.Psychology;
                     break;
                 case "English":
-                    department = Department.English;
+                    this.department = Department.English;
                     break;
                 case "History":
-                    department = Department.History;
+                    this.department = Department.History;
                     break;
             }
         }
@@ -76,6 +78,18 @@ namespace CourseMan.Domain
         {
             get { return password; }
             set { password = value; }
+        }
+
+        public string FirstName
+        {
+            get { return firstName; }
+            set { firstName = value; }
+        }
+
+        public string LastName
+        {
+            get { return lastName; }
+            set { lastName = value; }
         }
 
         public UserType Type

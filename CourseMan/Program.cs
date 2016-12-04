@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using CourseMan.Domain;
 using CourseMan.Domain.Services;
+using CourseMan.Domain.ValueObjects;
 using CourseMan.Application;
 using CourseMan.Application.Services;
+using CourseMan.Application.ValueObjects;
 
 namespace CourseMan
 {

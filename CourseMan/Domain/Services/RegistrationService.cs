@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CourseMan.Domain.ValueObjects;
 
 namespace CourseMan.Domain.Services
 {
@@ -27,6 +28,8 @@ namespace CourseMan.Domain.Services
 			// Check if there are no empty seats.
 			if (section.IsFull)
 				throw new Exception("Error: no seats available for this section!");
+
+			// TODO: Check for conflicting meeting times.
 
 			// Register the student.
 			section.RegisteredStudents.Add(studentId);

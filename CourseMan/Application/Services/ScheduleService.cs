@@ -4,6 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CourseMan.Domain;
+using CourseMan.Domain.Services;
+using CourseMan.Domain.ValueObjects;
+using CourseMan.Application.ValueObjects;
 
 namespace CourseMan.Application.Services
 {
@@ -12,6 +15,7 @@ namespace CourseMan.Application.Services
 		public ScheduleService()
 		{
 		}
+
 
 		// Get the schedule of a student, containing his/her currently registered sections.
 		public Schedule GetStudentSchedule(int studentId)
@@ -37,6 +41,17 @@ namespace CourseMan.Application.Services
 				section => section.InstructorID == instructerId));
 			
 			return schedule;
+		}
+		
+		// Return true if the room is occupied at the given time.
+		public bool IsRoomInUse(Room room, DateTime dateTime)
+		{
+			foreach (Section section in CourseSectionHandler.Instance.Sections.Values)
+			{
+				if (section.Room == room && section.IsMeetingAt(dateTime))
+					return true;
+			}
+			return false;
 		}
 	}
 }
