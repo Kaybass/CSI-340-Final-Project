@@ -14,9 +14,6 @@ namespace CourseMan.Interface
     {
         public StudentConsole()
         {
-          
-
-            // Setup the admin console menu.
             Text = "Welcome to the Student console!";
             AddMenuAction("C", "See available sections", ShowAllSections);
             AddMenuAction("S", "See your schedule", ShowSchedule);
@@ -102,7 +99,8 @@ namespace CourseMan.Interface
             }
             Console.Clear();
         }
-
+		
+		// Logout and return to the login menu.
         public void Logout()
         {
             AuthenticationService.Instance.LogOut();

@@ -45,11 +45,17 @@ namespace CourseMan.Domain.ValueObjects
 
         public override string ToString()
         {
-            string output;
+			int h1 = (startTime.Hours % 12);
+			if (h1 == 0)
+				h1 = 12;
+			int h2 = (endTime.Hours % 12);
+			if (h2 == 0)
+				h2 = 12;
 
-            output = startTime.ToString() + " - " + endTime.ToString() + ", " + dayOfWeek.ToString();
-
-            return output;
+			return String.Format("{0}, {1}:{2,2:00} {3} - {4}:{5,2:00} {6}",
+				dayOfWeek.ToString(),
+				h1, startTime.Minutes, (startTime.Hours >= 12 ? "AM" : "PM"),
+				h2, endTime.Minutes, (endTime.Hours >= 12 ? "AM" : "PM"));
         }
 
 

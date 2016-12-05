@@ -293,7 +293,8 @@ namespace CourseMan.Interface
 
 			return;
         }
-
+		
+		// Logout and return to the login menu.
         public void Logout()
 		{
 			AuthenticationService.Instance.LogOut();

@@ -43,12 +43,20 @@ namespace CourseMan.Infrastructure
 			this.isRunning = false;
 		}
 
+		// Do-nothing virtual method called when the menu is opened.
+		public virtual void OnMenuBegin() {}
+		
+		// Do-nothing virtual method called when the menu is exited.
+		public virtual void OnMenuExit() {}
+
 		// Open the sub-menu, letting the user choose from its items.
 		public void PerformPressAction()
 		{
 			Console.Clear();
 			Console.WriteLine();
 			isRunning = true;
+
+			OnMenuBegin();
 
 			// Allow menu interactions repeatedly, until the menu is exited.
 			while (isRunning)
@@ -110,6 +118,7 @@ namespace CourseMan.Infrastructure
 		{
 			isRunning = false;
 			Console.Clear();
+			OnMenuExit();
 		}
 
 		// Enter into a sub-menu, running it on top of this one until it is exited.

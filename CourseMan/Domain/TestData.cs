@@ -29,7 +29,9 @@ namespace CourseMan.Domain
             User f = new User(6, "Faith.Faker", "password", "Student", "CompSci");
             User g = new User(7, "Gabriella.Gilly", "password", "Student", "CompSci");
             User h = new User(8, "Harrison.Hammy", "password", "Student", "CompSci");
-			User mrConvenient = new User(1, "a", "a", "Administrator", "CompSci");
+			User admin = new User(9, "a", "a", "Administrator", "CompSci");
+			User instructor = new User(10, "i", "i", "Instructor", "CompSci");
+			User student = new User(11, "s", "s", "Student", "CompSci");
 
             csh.AddUser(a);
             csh.AddUser(b);
@@ -39,7 +41,9 @@ namespace CourseMan.Domain
             csh.AddUser(f);
             csh.AddUser(g);
             csh.AddUser(h);
-            csh.AddUser(mrConvenient);
+            csh.AddUser(admin);
+            csh.AddUser(instructor);
+            csh.AddUser(student);
 
             Course softwareSpecialities = new Course(new CourseID("CSI", 340), "Software Specialities", "A class in domain-driven design");
 
@@ -48,9 +52,12 @@ namespace CourseMan.Domain
             List<MeetingTime> meetingTimes = new List<MeetingTime>();
             meetingTimes.Add(new MeetingTime(DayOfWeek.Tuesday, new TimeSpan(02, 00, 0), new TimeSpan(03, 15, 0)));
             meetingTimes.Add(new MeetingTime(DayOfWeek.Thursday, new TimeSpan(03, 30, 0), new TimeSpan(04, 45, 0)));
-            Section z = new Section(new SectionID("CSI", 340, 01), new Room("Wick", 101), meetingTimes,2,20);
+            Section z = new Section(new SectionID("CSI", 340, 01), new Room("Wick", 101), meetingTimes,10,20);
 
             csh.AddSection(z);
+			csh.AddSection(new Section(new SectionID("CSI", 340, 02), new Room("MIC", 308), meetingTimes,10,20));
+
+
         }
     }
 }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace CourseMan.Domain.ValueObjects
 {
 	// Value object used to identify courses.
-    public struct CourseID
+    public struct CourseID : IComparable<CourseID>
     {
         private string majorCode; // 3-letter major code (ex: CSI)
         private int courseNumber; // 3-digit course number (unique per major code).
@@ -37,6 +37,18 @@ namespace CourseMan.Domain.ValueObjects
 			hash = (hash * 7) + majorCode.GetHashCode();
 			hash = (hash * 7) + courseNumber;
 			return hash;
+		}
+
+		public int CompareTo(CourseID other)
+		{
+			// Order By:
+			// 1. Major code.
+			int returnVal = majorCode.CompareTo(other.MajorCode);
+			if (returnVal != 0)
+				return returnVal;
+
+			// 2. Course number.
+			return courseNumber.CompareTo(other.CourseNumber);
 		}
 
 		public static bool operator ==(CourseID a, CourseID b)

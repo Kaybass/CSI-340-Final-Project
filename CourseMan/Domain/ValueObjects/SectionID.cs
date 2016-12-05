@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace CourseMan.Domain.ValueObjects
 {
 	// Value object used to identify sections.
-	public struct SectionID
+	public struct SectionID : IComparable<SectionID>
 	{
         private CourseID courseId; // The course of which this section is an instance.
         private int sectionNumber; // 2-digit section number (unique per course).
@@ -24,7 +24,6 @@ namespace CourseMan.Domain.ValueObjects
             this.courseId = courseId;
             this.sectionNumber = sectionNumber;
         }
-
 
 		// Convert a course ID to a string, combining the major code, course
 		// number, and section number separated by dashes (ex: CSI-340-01)
@@ -44,6 +43,23 @@ namespace CourseMan.Domain.ValueObjects
 			hash = (hash * 7) + courseId.GetHashCode();
 			hash = (hash * 7) + sectionNumber;
 			return hash;
+		}
+
+		public int CompareTo(SectionID other)
+		{
+			// Order By:
+			// 1. Major code.
+			int returnVal = courseId.MajorCode.CompareTo(other.courseId.MajorCode);
+			if (returnVal != 0)
+				return returnVal;
+
+			// 2. Course number.
+			returnVal = courseId.CourseNumber.CompareTo(other.courseId.CourseNumber);
+			if (returnVal != 0)
+				return returnVal;
+
+			// 3. Section number.
+			return sectionNumber.CompareTo(other.sectionNumber);
 		}
 
 		public static bool operator ==(SectionID a, SectionID b)
