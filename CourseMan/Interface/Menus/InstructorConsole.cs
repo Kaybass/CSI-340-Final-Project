@@ -48,7 +48,7 @@ namespace CourseMan.Interface
 				// Get the course for this section.
 				Course course = CourseSectionHandler.Instance.GetCourse(section.CourseID);
 
-				// Print out section info.
+				// Print out section info.7
 				Console.WriteLine("{0} {1}, Room: {2}", section.SectionID, course.Name, section.Room);
 				
 				// Print out meeting times.

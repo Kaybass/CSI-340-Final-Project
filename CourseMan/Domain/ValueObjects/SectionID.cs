@@ -32,6 +32,34 @@ namespace CourseMan.Domain.ValueObjects
             return String.Format("{0}-{1,2:00}", courseId.ToString(), sectionNumber);
         }
 
+		// Try to parse a Section ID from a string.
+		// The string must have 3 parts separated by spaces or dashes.
+		// 1st part: major code, 2nd part: course number, 3rd part: section number.
+		public static bool TryParse(string value, out SectionID result)
+		{
+			result = default(SectionID);
+
+			// Split the string into 3 parts.
+			string[] tokens = value.Split(' ', '-');
+			if (tokens.Length != 3)
+				return false;
+
+			// 1st part: Major code.
+			result.MajorCode = tokens[0].ToUpper();
+
+			// 2nd part: Course number.
+			int courseNumber;
+			if (!int.TryParse(tokens[1], out courseNumber))
+				return false;
+			result.CourseNumber = courseNumber;
+			
+			// 3rd part: Section number.
+			if (!int.TryParse(tokens[2], out result.sectionNumber))
+				return false;
+
+			return true;
+		}
+
 		public override bool Equals(object obj)
 		{
 			return (obj is SectionID && (SectionID) obj == this);

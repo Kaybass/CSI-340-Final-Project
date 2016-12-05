@@ -25,22 +25,27 @@ namespace CourseMan.Domain.Services
 		{
 		}
 
-
+		// Register a student for a section.
+		// If an error is encountered, a RegistrationException will be thrown.
 		public void Register(int studentId, SectionID sectionId)
 		{
 			// Find the section.
-			Section section = CourseSectionHandler.Instance.Sections[sectionId];
+			Section section = CourseSectionHandler.Instance.GetSection(sectionId);
+			if (section == null)
+				throw new RegistrationException("section " + sectionId + " does not exist.");
 
 			// Find the student.
-			User student = CourseSectionHandler.Instance.Users[studentId];
+			User student = CourseSectionHandler.Instance.GetUser(studentId);
+			if (student == null)
+				throw new RegistrationException("student ID " + studentId + " does not exist.");
 
 			// Check if the student is already registered for this section.
 			if (section.RegisteredStudents.Contains(studentId))
-				throw new RegistrationException("Error: student is already registed for this section!");
+				throw new RegistrationException("student is already registed for this section");
 
 			// Check if there are no empty seats.
 			if (section.IsFull)
-				throw new RegistrationException("Error: no seats available for this section!");
+				throw new RegistrationException("no seats available for this section");
 
 			// TODO: Check for conflicting meeting times.
 
@@ -48,14 +53,18 @@ namespace CourseMan.Domain.Services
 			section.RegisteredStudents.Add(studentId);
 		}
 		
+		// Un-Register a student for a section.
+		// If an error is encountered, a RegistrationException will be thrown.
 		public void UnRegister(int studentId, SectionID sectionId)
 		{
 			// Find the section.
-			Section section = CourseSectionHandler.Instance.Sections[sectionId];
+			Section section = CourseSectionHandler.Instance.GetSection(sectionId);
+			if (section == null)
+				throw new RegistrationException("section " + sectionId + " does not exist.");
 
 			// Check if the student is already registered for this section.
 			if (!section.RegisteredStudents.Contains(studentId))
-				throw new Exception("Error: student is not registed for this section!");
+				throw new RegistrationException("student is not registed for this section");
 			
 			// Unregister the student.
 			section.RegisteredStudents.Remove(studentId);

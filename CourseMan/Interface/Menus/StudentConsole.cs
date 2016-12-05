@@ -104,55 +104,72 @@ namespace CourseMan.Interface
             Console.Clear();
         }
 
+		// Prompt the user to register for a section.
         public void RegisterForSection()
         {
-            int classid = 0, sectid = 0;
             Console.Clear();
-            Console.WriteLine("Enter in the majorcode for the section you want to register");
-            string code = Console.ReadLine();
-            Console.WriteLine("Course code");
-            string classnum = Console.ReadLine();
-            try
-            {
-                classid = int.Parse(classnum);
-            }
-            catch
-            {
-                Console.Clear();
-                Console.WriteLine("invalid");
-                return;
-            }
-            Console.WriteLine("Section id");
-            string sectnum = Console.ReadLine();
-            try
-            {
-                sectid = int.Parse(sectnum);
-            }
-            catch
-            {
-                Console.Clear();
-                Console.WriteLine("invalid");
-                return;
-            }
-            SectionID ID = new SectionID(code, classid, sectid);
+			Console.WriteLine("Enter the ID of the section you want to register for:");
+			string input = Console.ReadLine();
+			Console.WriteLine();
 
-            RegistrationService reg = new RegistrationService();
-            try
-            {
-                reg.Register(AuthenticationService.Instance.LoggedInUser.UserID, ID);
-            }
-            catch
-            {
-                Console.Clear();
-                Console.WriteLine("invalid");
-                return;
-            }
+			// Try to parse the input into a section ID.
+			SectionID sectionId;
+			if (!SectionID.TryParse(input, out sectionId))
+			{
+				Console.WriteLine("Error: invalid input");
+			}
+			else
+			{
+				try
+				{
+					// Attempt to register for the section.
+					int myId = AuthenticationService.Instance.LoggedInUser.UserID;
+					RegistrationService.Instance.Register(myId, sectionId);
+					Console.WriteLine("Successfully registered for {0}.", sectionId);
+				}
+				catch (Exception e)
+				{
+					Console.WriteLine("Error registering for {0}:\n{1}", sectionId, e.Message);
+				}
+			}
+			
+			Console.Write("\nPress enter to go back...");
+			Console.ReadLine();
             Console.Clear();
-        }
+		}
 		
+		// Prompt the user to unregister for (drop) a section.
 		public void UnRegisterForSection()
 		{
-			// TODO.
+            Console.Clear();
+			Console.WriteLine("Enter the ID of the section you want to drop:");
+			string input = Console.ReadLine();
+			Console.WriteLine();
+
+			// Try to parse the input into a section ID.
+			SectionID sectionId;
+			if (!SectionID.TryParse(input, out sectionId))
+			{
+				Console.WriteLine("Error: invalid input");
+			}
+			else
+			{
+				try
+				{
+					// Attempt to un-register for the section.
+					int myId = AuthenticationService.Instance.LoggedInUser.UserID;
+					RegistrationService.Instance.UnRegister(myId, sectionId);
+					Console.WriteLine("Successfully dropped {0}.", sectionId);
+				}
+				catch (Exception e)
+				{
+					Console.WriteLine("Error dropping {0}:\n{1}", sectionId, e.Message);
+				}
+			}
+			
+			Console.Write("\nPress enter to go back...");
+			Console.ReadLine();
+            Console.Clear();
 		}
 
 		// Logout and return to the login menu.

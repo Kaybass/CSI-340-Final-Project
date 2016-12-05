@@ -26,6 +26,28 @@ namespace CourseMan.Domain.ValueObjects
             return String.Format("{0}-{1,3:000}", majorCode, courseNumber);
         }
 
+		// Try to parse a Course ID from a string.
+		// The string must have 2 parts separated by spaces or dashes.
+		// 1st part: major code, 2nd part: course number.
+		public static bool TryParse(string value, out CourseID result)
+		{
+			result = default(CourseID);
+
+			// Split the string into 3 parts.
+			string[] tokens = value.Split(' ', '-');
+			if (tokens.Length != 2)
+				return false;
+
+			// 1st part: Major code.
+			result.MajorCode = tokens[0].ToUpper();
+
+			// 2nd part: Course number.
+			if (!int.TryParse(tokens[1], out result.courseNumber))
+				return false;
+
+			return true;
+		}
+
 		public override bool Equals(object obj)
 		{
 			return (obj is CourseID && (CourseID) obj == this);
