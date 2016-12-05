@@ -23,7 +23,7 @@ namespace CourseMan.Interface
             AddMenuAction("S", "See available sections", ShowAvailableSections);
             AddMenuAction("CC", "Create a new course", delegate ()
             {
-                Console.Write("Are you sure you want to create a new course to add to the system? (Y / N)");
+                Console.Write("Are you sure you want to create a new course to add to the system?\n(Y / N): ");
 				input = Console.ReadLine();
 				if (input == "Y" || input == "y")
 				{
@@ -33,7 +33,7 @@ namespace CourseMan.Interface
 			});
 			AddMenuAction("SS", "Create a new section", delegate()
 			{
-				Console.Write("Are you sure you want to create a new section to add to the system? (Y / N)");
+				Console.Write("Are you sure you want to create a new section to add to the system?\n(Y / N): ");
 				input = Console.ReadLine();
 				if (input == "Y" || input == "y")
 				{
@@ -62,7 +62,7 @@ namespace CourseMan.Interface
             foreach (KeyValuePair<CourseID, Course> p in CourseSectionHandler
 				.Instance.Courses.OrderBy(c => c.Key))
 			{
-				Console.WriteLine("{0} - {1}\n{2}\n",
+				Console.WriteLine("{0}: {1}\nDescription: {2}\n",
 					p.Value.CourseID, p.Value.Name, p.Value.Description);
 			}
 
@@ -118,47 +118,38 @@ namespace CourseMan.Interface
 		// Prompt the user to create a new course, adding it to the system.
         public void CreateNewCourse()
 		{
-			Course newCourse;
 			CourseSectionHandler csh = CourseSectionHandler.Instance;
-			CourseID newCourseID;
-			string majorCode, courseNumber, newName, newDesc;
 			
+            Console.Clear();
+			Console.WriteLine("Create a new course.");
+			Console.WriteLine();
+
 			// Prompt the course ID.
-			/* Get Major Code */
-			Console.WriteLine("First thing first, let's create a new Course ID\nEnter the Major Code for the new course:");
-			majorCode = Console.ReadLine();
-			/* Validate Major Code */
-			while (majorCode.Length != 3)
-            {
-                Console.WriteLine("Invalid Major Code\nEnter the correct Major Code for the new course:");
-                majorCode = Console.ReadLine();
-            }
-
-			/* Get Course Number */
-            Console.WriteLine("Great, now enter the course number:");
-            courseNumber = Console.ReadLine();
-			/* Validate Course Number */
-			while (courseNumber.Length != 3)
-            {
-                Console.WriteLine("Invalid Course Number\nEnter the correct Course Number for the new course:");
-                courseNumber = Console.ReadLine();
-            }
-            newCourseID = new CourseID(majorCode, Int32.Parse(courseNumber));
-            Console.WriteLine("Great, your new Course has the Course ID : {0}", newCourseID.ToString());
-
+			Console.WriteLine("First thing first, let's create a new Course ID");
+			Console.WriteLine("Enter the Major Code for the new course:");
+			Console.WriteLine("The format is: [Major Code]-[Course #] - (e.g. CSI-385)");
+			CourseID courseId = PromptCourseID();
+            Console.WriteLine("Great, your new Course has the Course ID : {0}", courseId.ToString());
+			Console.WriteLine();
+			
             // Prompt the course name.
             Console.WriteLine("Now what is the name of this new course?");
-            newName = Console.ReadLine();
+            string name = Console.ReadLine();
+			Console.WriteLine();
 
             // Prompt the course description.
-            Console.WriteLine("How about a description for {0}", newName);
-            newDesc = Console.ReadLine();
+            Console.WriteLine("Enter a description for {0}:", name);
+            string description = Console.ReadLine();
+			Console.WriteLine();
 
 			// Construct the new course and add it to the singleton.
-            csh.AddCourse(new Course(newCourseID, newName, newDesc));
-
-            // Demonstrate the new course exists in the singleton.
-            Console.WriteLine("Congratulations, the new Course, {0}, has been created successfully and added to the system.", csh.GetCourse(newCourseID).ToString());
+			if (AddCourseToSystem(new Course(courseId,  name, description)))
+			{
+				// Demonstrate the new course exists in the singleton.
+				Console.WriteLine("Congratulations, the new Course, {0}, has been created successfully and added to the system.",
+					csh.GetCourse(courseId).CourseID);
+			}
+            
 			Console.Write("\nPress enter to go back...");
             Console.ReadLine();
             Console.Clear();
@@ -198,19 +189,92 @@ namespace CourseMan.Interface
 			
 			// Prompt the number of seats.
 			Console.WriteLine("Last question. How many seats are available in this section?");
-			int  numSeats = PromptNumberOfSeats();
+			int numSeats = PromptNumberOfSeats();
 			Console.WriteLine();
 
 			// Construct the new section and add it to the singleton.
-			csh.AddSection(new Section(newSectionID, room,
-				meetingTimes, instructorId, numSeats));
+			if (AddSectionToSystem(new Section(newSectionID, room,
+					meetingTimes, instructorId, numSeats)))
+			{
+				// Demonstrate the new course exists in the singleton.
+				Console.WriteLine("Congratulations! The new Section {0} has been created!",
+					csh.GetSection(newSectionID).SectionID);
+			}
 
-			// Demonstrate the new course exists in the singleton.
-			Console.WriteLine("Congratulations! The new Section {0} has been created!", csh.GetSection(newSectionID).ToString());
 			Console.Write("\nPress enter to go back...");
             Console.ReadLine();
             Console.Clear();
         }
+		
+		// Logout and return to the login menu.
+        public void Logout()
+		{
+			AuthenticationService.Instance.LogOut();
+			ExitMenu();
+		}
+		
+		// Add the given course to the system, returning true if successful, or false upon error.
+		public bool AddCourseToSystem(Course course)
+		{
+			try
+			{
+				CourseSectionHandler.Instance.AddCourse(course);
+			}
+			catch (Exception e)
+			{
+				Console.WriteLine("Error: {0}", e.Message);
+				return false;
+			}
+			return true;
+		}
+
+		// Add the given section to the system, returning true if successful, or false upon error.
+		public bool AddSectionToSystem(Section section)
+		{
+			try
+			{
+				CourseSectionHandler.Instance.AddSection(section);
+			}
+			catch (Exception e)
+			{
+				Console.WriteLine("Error: {0}", e.Message);
+				return false;
+			}
+			return true;
+		}
+
+		// Prompt the user to enter a course ID (for creating a new course).
+		public CourseID PromptCourseID()
+		{
+            CourseSectionHandler csh = CourseSectionHandler.Instance;
+			CourseID courseID = new CourseID();
+			bool success = false;
+
+			// Prompt Section ID
+			while (!success)
+			{
+				Console.Write("Enter a course ID: ");
+				string input = Console.ReadLine();
+
+				// Parse the section ID.
+				if (!CourseID.TryParse(input, out courseID))
+				{
+					Console.WriteLine("Error: invalid input!");
+				}
+				// Does this course already exist?
+				else if (csh.GetCourse(courseID) != null)
+				{
+					Console.WriteLine("Error: The course number {0} already exists",
+						courseID);
+				}
+				else
+				{
+					success = true;
+				}
+			}
+
+			return courseID;
+		}
 
 		// Prompt the user to enter a section ID (for creating a new section).
 		public SectionID PromptSectionID()
@@ -426,13 +490,6 @@ namespace CourseMan.Interface
 			}
 
 			return numSeats;
-		}
-		
-		// Logout and return to the login menu.
-        public void Logout()
-		{
-			AuthenticationService.Instance.LogOut();
-			ExitMenu();
 		}
 	}
 }
