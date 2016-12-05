@@ -63,55 +63,15 @@
     <Compile Include="Infrastructure\IMenuItem.cs" />
     <Compile Include="Infrastructure\SubMenu.cs" />
     <Compile Include="Infrastructure\MenuAction.cs" />
-    <Compile Include="Interface\Admin.cs" />
     <Compile Include="Interface\Menus\AdminConsole.cs" />
     <Compile Include="Interface\Menus\InstructorConsole.cs" />
     <Compile Include="Interface\Menus\LoginMenu.cs" />
-    <Compile Include="Interface\Form1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Interface\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </Compile>
     <Compile Include="Domain\ValueObjects\MeetingTime.cs" />
-    <Compile Include="Interface\AdminForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Interface\AdminForm.Designer.cs">
-      <DependentUpon>AdminForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Interface\Instructor.cs" />
-    <Compile Include="Interface\LogIn.cs" />
     <Compile Include="Interface\Menus\StudentConsole.cs" />
-    <Compile Include="Interface\ProfessorForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Interface\ProfessorForm.Designer.cs">
-      <DependentUpon>ProfessorForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Interface\Student.cs" />
-    <Compile Include="Interface\StudentForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Interface\StudentForm.Designer.cs">
-      <DependentUpon>StudentForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Domain\ValueObjects\Room.cs" />
     <Compile Include="Domain\Section.cs" />
-    <EmbeddedResource Include="Interface\Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Interface\AdminForm.resx">
-      <DependentUpon>AdminForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Interface\ProfessorForm.resx">
-      <DependentUpon>ProfessorForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Interface\StudentForm.resx">
-      <DependentUpon>StudentForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
