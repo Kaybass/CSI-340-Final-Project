@@ -94,6 +94,7 @@ namespace CourseMan.Domain.ValueObjects
         public List<MeetingTime> Times
         {
             get { return times; }
+            set { times = value; }
         }
 		
         public Room Room
