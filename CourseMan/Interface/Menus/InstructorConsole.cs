@@ -12,7 +12,7 @@ using CourseMan.Application.ValueObjects;
 
 namespace CourseMan.Interface
 {
-    class InstructorConsole : SubMenu
+    public class InstructorConsole : SubMenu
     {
 		
         public InstructorConsole()
