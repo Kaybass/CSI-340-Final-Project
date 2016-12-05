@@ -45,11 +45,13 @@ namespace CourseMan.Domain
             // Default constructor
         }
 		
-        public User(int id, string username, string password, UserType type, Department department)
+        public User(int id, string username, string password, string firstName, string lastName, UserType type, Department department)
 		{
             this.userId = id;
             this.username = username;
             this.password = password;
+			this.firstName = firstName;
+			this.lastName = lastName;
 			this.type = type;
 			this.department = department;
 		}
@@ -120,6 +122,11 @@ namespace CourseMan.Domain
         {
             get { return lastName; }
             set { lastName = value; }
+        }
+
+        public string FullName
+        {
+            get { return String.Format("{0} {1}", firstName, lastName); }
         }
 
         public UserType Type

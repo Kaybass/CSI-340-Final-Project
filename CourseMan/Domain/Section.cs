@@ -25,6 +25,15 @@ namespace CourseMan.Domain
 			registeredStudentIds = new HashSet<int>();
         }
 
+        public Section(SectionID id, Room room, int instructorid, int seats)
+        {
+            sectionId = id;
+            meetingInfo = new MeetingInfo(room);
+            registeredStudentIds = new HashSet<int>();
+            instructorId = instructorid;
+            maxSeats = seats;
+        }
+
         public Section(SectionID id, Room room, List<MeetingTime> times,int instructorid, int seats)
         {
             sectionId = id;

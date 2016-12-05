@@ -27,7 +27,7 @@ namespace CourseMan.Interface
 		{
 			// Customize the text based on the logged-in instructor's name.
 			User instructor = AuthenticationService.Instance.LoggedInUser;
-            Text = "Welcome to the Instructor console, " + instructor.Username + "!";
+            Text = "Welcome to the Instructor console, " + instructor.FullName + "!";
 		}
 
 		// Show all sections the instructor is teaching.
@@ -38,7 +38,7 @@ namespace CourseMan.Interface
 			// Compile a schedule for the instructor.
 			ScheduleService scheduleService = new ScheduleService();
 			Schedule schedule = scheduleService.GetInstructerSchedule(instructor.UserID);
-			
+
             Console.Clear();
 			Console.WriteLine("You are teaching the following courses:\n");
 
@@ -49,7 +49,7 @@ namespace CourseMan.Interface
 				Course course = CourseSectionHandler.Instance.GetCourse(section.CourseID);
 
 				// Print out section info.
-				Console.WriteLine("{0} - {1} - {2}", section.SectionID, course.Name, section.Room);
+				Console.WriteLine("{0} {1}, Room: {2}", section.SectionID, course.Name, section.Room);
 				
 				// Print out meeting times.
                 foreach (MeetingTime m in section.MeetingInfo.Times)

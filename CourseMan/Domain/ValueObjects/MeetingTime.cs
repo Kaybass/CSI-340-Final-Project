@@ -40,7 +40,7 @@ namespace CourseMan.Domain.ValueObjects
 		// Return true if the given meeting time conflicts with this one (overlaps in time).
 		public bool ConflictsWith(MeetingTime other)
 		{
-			return (other.endTime <= startTime || other.startTime >= endTime);
+			return !(other.endTime <= startTime || other.startTime >= endTime);
 		}
 
         public override string ToString()

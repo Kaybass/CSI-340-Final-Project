@@ -20,19 +20,19 @@ namespace CourseMan.Domain
         public void addTheDataToTheThing()
         {
             CourseSectionHandler csh = CourseSectionHandler.Instance;
-
-            User a = new User(1, "Adam.Acer", "password", "Administrator", "CompSci");
-            User b = new User(2, "Brian.Banana", "password", "Instructor", "CompSci");
-            User c = new User(3, "Chris.Cabana", "password", "Student", "CompSci");
-            User d = new User(4, "Dell.Diesel", "password", "Student", "CompSci");
-            User e = new User(5, "Evan.Edmunds", "password", "Student", "CompSci");
-            User f = new User(6, "Faith.Faker", "password", "Student", "CompSci");
-            User g = new User(7, "Gabriella.Gilly", "password", "Student", "CompSci");
-            User h = new User(8, "Harrison.Hammy", "password", "Student", "CompSci");
-			User admin = new User(9, "a", "a", "Administrator", "CompSci");
-			User instructor = new User(10, "i", "i", "Instructor", "CompSci");
-			User student = new User(11, "s", "s", "Student", "CompSci");
-
+			
+			User a = new User(1, "Adam.Acer", "password", "Adam", "Acer", UserType.Administrator, Department.CompSci);
+			User b = new User(2, "Brian.Banana", "password", "Brian", "Banana", UserType.Instructor, Department.CompSci);
+			User c = new User(3, "Chris.Cabana", "password", "Chris", "Cabana", UserType.Student, Department.CompSci);
+			User d = new User(4, "Dell.Diesel", "password", "Dell", "Diesel", UserType.Student, Department.CompSci);
+			User e = new User(5, "Evan.Edmunds", "password", "Evan", "Edmunds", UserType.Student, Department.CompSci);
+			User f = new User(6, "Faith.Faker", "password", "Faith", "Faker", UserType.Student, Department.CompSci);
+			User g = new User(7, "Gabriella.Gilly", "password", "Gabriella", "Gilly", UserType.Student, Department.CompSci);
+			User h = new User(8, "Harrison.Hammy", "password", "Harrison", "Hammy", UserType.Student, Department.CompSci);
+			User admin = new User(9, "a", "a", "Mr.", "Admin", UserType.Administrator, Department.CompSci);
+			User instructor = new User(10, "i", "i", "Mr.", "Instructor", UserType.Instructor, Department.CompSci);
+			User student = new User(11, "s", "s", "Mr.", "Student", UserType.Student, Department.CompSci);
+			
             csh.AddUser(a);
             csh.AddUser(b);
             csh.AddUser(c);
@@ -46,12 +46,23 @@ namespace CourseMan.Domain
             csh.AddUser(student);
 
             Course softwareSpecialities = new Course(new CourseID("CSI", 340), "Software Specialities", "A class in domain-driven design");
-
+			Course operatingSystems = new Course(new CourseID("CSI", 385), "Operating Systems Architecture", "A class about operating systems and FAT12");
             csh.AddCourse(softwareSpecialities);
+            csh.AddCourse(operatingSystems);
+
+			Section section = new Section(new SectionID("CSI", 385, 01), new Room("Wick", 101), 10, 20); 
+			section.MeetingInfo.Times.Add(new MeetingTime(DayOfWeek.Tuesday, 12,30, 13,45));
+			section.MeetingInfo.Times.Add(new MeetingTime(DayOfWeek.Thursday, 12,30, 13,45));
+			csh.AddSection(section);
+			section = new Section(new SectionID("CSI", 385, 02), new Room("Wick", 101), 10, 20); 
+			section.MeetingInfo.Times.Add(new MeetingTime(DayOfWeek.Tuesday, 11,00, 12,15));
+			section.MeetingInfo.Times.Add(new MeetingTime(DayOfWeek.Friday, 9,30, 10,45));
+			csh.AddSection(section);
+
 
             List<MeetingTime> meetingTimes = new List<MeetingTime>();
-            meetingTimes.Add(new MeetingTime(DayOfWeek.Tuesday, new TimeSpan(02, 00, 0), new TimeSpan(03, 15, 0)));
-            meetingTimes.Add(new MeetingTime(DayOfWeek.Thursday, new TimeSpan(03, 30, 0), new TimeSpan(04, 45, 0)));
+            meetingTimes.Add(new MeetingTime(DayOfWeek.Tuesday, 2,00, 3,15));
+            meetingTimes.Add(new MeetingTime(DayOfWeek.Thursday, 2,00, 3,15));
             Section z = new Section(new SectionID("CSI", 340, 01), new Room("Wick", 101), meetingTimes,10,20);
 
             csh.AddSection(z);

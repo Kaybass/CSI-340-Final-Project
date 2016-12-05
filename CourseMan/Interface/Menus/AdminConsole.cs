@@ -12,18 +12,10 @@ namespace CourseMan.Interface
 {
 	public class AdminConsole : SubMenu
 	{
-		private SubMenu subMenu;
 
 		public AdminConsole()
 		{
 			String input;
-			// Create a test menu.
-			subMenu = new SubMenu("Example Sub Menu");
-			subMenu.AddMenuAction("H", "Hello", delegate()
-			{
-				Console.WriteLine("Hello, World!");
-			});
-			subMenu.AddExitItem("B", "Back");
 
 			// Setup the admin console menu.
 			Text = "Welcome to the admin console!";
@@ -31,7 +23,7 @@ namespace CourseMan.Interface
             AddMenuAction("S", "See available sections", ShowAvailableSections);
             AddMenuAction("CC", "Create a new course", delegate ()
             {
-                Console.Write("Are you sure you want to create a new course to add to the system?");
+                Console.Write("Are you sure you want to create a new course to add to the system? (Y / N)");
 				input = Console.ReadLine();
 				if (input == "Y" || input == "y")
 				{
@@ -42,37 +34,86 @@ namespace CourseMan.Interface
 			{
 				Console.Write("Are you sure you want to create a new section to add to the system? (Y / N)");
 				input = Console.ReadLine();
-				if(input == "Y" || input == "y")
+				if (input == "Y" || input == "y")
 				{
 					CreateNewSection();
 				}
 			});
-			AddSubMenu("T", "Enter test sub menu", subMenu);
 			AddMenuAction("L", "Logout", Logout);
 		}
 
-		public void ShowAvailableCourses()
+		// Called when the menu is opened.
+		public override void OnMenuBegin()
 		{
-            foreach(KeyValuePair<CourseID, Course> p in CourseSectionHandler.Instance.Courses)
-            {
-				Console.WriteLine("CourseID:{0}\nCourseName:{1}\nCourseDescription:{2}",
-					p.Value.CourseID, p.Value.Name, p.Value.Description);
-            }
+			// Customize the text based on the logged-in instructor's name.
+			User admin = AuthenticationService.Instance.LoggedInUser;
+            Text = "Welcome to the admin console, " + admin.FullName + "!";
 		}
 
+		// Show a list of all available courses.
+		public void ShowAvailableCourses()
+		{
+            Console.Clear();
+			Console.WriteLine("Available courses:\n");
+
+			// Print information for each course.
+            foreach (KeyValuePair<CourseID, Course> p in CourseSectionHandler
+				.Instance.Courses.OrderBy(c => c.Key))
+			{
+				Console.WriteLine("{0} - {1}\n{2}\n",
+					p.Value.CourseID, p.Value.Name, p.Value.Description);
+			}
+
+			Console.Write("Press enter to go back...");
+            Console.ReadLine();
+            Console.Clear();
+		}
+		
+		// Show a list of all available sections and their corresponding courses.
         public void ShowAvailableSections()
         {
-            foreach (KeyValuePair<SectionID, Section> p in CourseSectionHandler.Instance.Sections)
-            {
-                Console.WriteLine("SectionID:{0}\nMax Seats:{1}\nInsructor ID: {2}", p.Value.SectionID, p.Value.MaxSeats, p.Value.InstructorID);
+            Console.Clear();
+			Console.WriteLine("List of available sections and their courses:\n");
 
-                foreach (MeetingTime m in p.Value.MeetingInfo.Times)
-                {
-                    Console.WriteLine("Meeting: {0} from {1} until {2}", m.DayOfWeek, m.StartTime, m.EndTime);
-                }
-            }
+			CourseID currentCourseId =  new CourseID();
+			bool first = true;
+			Course course = null;
+
+			// Print the list of all sections, grouped by course.
+            foreach (Section section in CourseSectionHandler.Instance.Sections.Values.OrderBy(s => s.SectionID))
+			{
+				// Write course information for each group of sections per course.
+				if (first || section.CourseID != currentCourseId)
+				{
+					first = false;
+					currentCourseId = section.CourseID;
+					course = CourseSectionHandler.Instance.GetCourse(currentCourseId);
+					
+					Console.WriteLine("-------------------------------------------------------");
+					Console.WriteLine("{0} {1}\n{2}\n",
+						course.CourseID, course.Name, course.Description);
+					Console.WriteLine("Available Sections:\n");
+				}
+				
+				// Print out section info.
+				User instructor = CourseSectionHandler.Instance.GetUser(section.InstructorID);
+				Console.WriteLine("{0}, Room: {2}, Seats {3}/{4}, Instructor: {5}",
+					section.SectionID, course.Name, section.Room, section.AvailableSeats,
+					section.MaxSeats, instructor.FullName);
+				
+				// Print out meeting times.
+				foreach (MeetingTime m in section.MeetingInfo.Times)
+					Console.WriteLine("{0}", m.ToString());
+
+				Console.WriteLine();
+			}
+
+			Console.Write("Press enter to go back...");
+            Console.ReadLine();
+            Console.Clear();
         }
-
+		
+		// Prompt the user to create a new course, adding it to the system.
         public void CreateNewCourse()
 		{
 			Course newCourse;
@@ -121,7 +162,8 @@ namespace CourseMan.Interface
 
 			return;
         }
-
+		
+		// Prompt the user to create a new section, adding it to the system.
         public void CreateNewSection()
         {
 			Section newSection;
