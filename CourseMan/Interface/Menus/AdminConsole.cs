@@ -162,54 +162,39 @@ namespace CourseMan.Interface
 
 			return;
         }
-		
-		// Prompt the user to create a new section, adding it to the system.
-        public void CreateNewSection()
-        {
-			Section newSection;
-            CourseSectionHandler csh = CourseSectionHandler.Instance;
-            SectionID newSectionID = new SectionID();
-            CourseID newCourseID = new CourseID();
-            Room newRoom;
-			MeetingTime newMT = new MeetingTime();
-            List<MeetingTime> newMeetingTimes = new List<MeetingTime>();
-            String majorCode = "", courseNumber = "", sectionNumber = "", roomBuilding = "", roomNumber = "", instructorID = "", seats = "", time = "";
-			bool success;
 
-			/* Create Section ID */
+		public SectionID PromptSectionID()
+		{
+            CourseSectionHandler csh = CourseSectionHandler.Instance;
+			SectionID sectionID = new SectionID();
+			bool success = false;
+
+			// Prompt Section ID
 			Console.WriteLine("Alright, let's first create a new Section ID");
-			success = false;
-			/* While loop to verify the user will create section for an existing course */
+			Console.WriteLine("The format is: [Major Code]-[Course #]-[Section #] -- (e.g. CSI-130-01)");
+
 			while (!success)
 			{
-				/* Get Major Code */
-				Console.WriteLine("Enter the Major Code for the section you wish to add:");
-				majorCode = Console.ReadLine();
-				/* Validate Major Code */
-				while (majorCode.Length != 3)
-				{
-					Console.WriteLine("Invalid Major Code\nEnter the correct Major Code for the new section:");
-					majorCode = Console.ReadLine();
-				}
-				/* Set Major Code */
-				newCourseID.MajorCode = majorCode;
+				Console.Write("Enter a section ID: ");
+				string input = Console.ReadLine();
 
-				/* Get Course Number */
-				Console.WriteLine("Great, now enter the course number for the new section:");
-				courseNumber = Console.ReadLine();
-				/* Validate Course Number */
-				while (courseNumber.Length != 3)
+				// Parse the section ID.
+				if (!SectionID.TryParse(input, out sectionID))
 				{
-					Console.WriteLine("Invalid Course Number\nEnter the correct Course Number for the new section:");
-					courseNumber = Console.ReadLine();
+					Console.WriteLine("Error: invalid input!");
 				}
-				/* Set Course Number */
-				newCourseID.CourseNumber = Int32.Parse(courseNumber);
-
-				/* Check if a course exists with the specified Major Code and Course Number */
-				if (csh.GetCourse(newCourseID) == null)
+				// Does this course exist?
+				else if (csh.GetCourse(sectionID.CourseID) == null)
 				{
-					Console.WriteLine("The specified course does not exist in the system. If you are trying to create a section for a course that does not exist, please add the course before adding a section of the course.");
+					Console.WriteLine("Error: The course {0} does not exist in the system.", sectionID.CourseID);
+					Console.WriteLine("If you are trying to create a section for a course that does not");
+					Console.WriteLine("exist, please add the course before adding a section of the course.");
+				}
+				// Does this section already exist?
+				else if (csh.GetSection(sectionID) != null)
+				{
+					Console.WriteLine("Error: The specified section number {0} already exists for the course {1}",
+						sectionID.SectionNumber, sectionID.CourseID);
 				}
 				else
 				{
@@ -217,41 +202,99 @@ namespace CourseMan.Interface
 				}
 			}
 
-			/* Get Section Number */
-			Console.WriteLine("Now what number is this new section?");
-			success = false;
-			while (!success)
-			{
-				Console.WriteLine("Section Number : ");
-				sectionNumber = Console.ReadLine();
-				/* Validate Section Number */
-				if (sectionNumber.Length != 2)
-				{
-					Console.WriteLine("Invalid Section Number. Please enter a valid number for this section.");
-				}
-				else
-				{
-					newSectionID.CourseID = newCourseID;
-					newSectionID.SectionNumber = Int32.Parse(sectionNumber);
-					if (csh.GetSection(newSectionID) != null)
-					{
-						Console.WriteLine("The specified section number, {0}, already exists for the course {1}-{2}", sectionNumber, majorCode, courseNumber);
-					}
-					else
-					{
-						success = true;
-					}
-				}
-			}
+			return sectionID;
+		}
+		
+		// Prompt the user to create a new section, adding it to the system.
+        public void CreateNewSection()
+        {
+			Section newSection;
+            CourseSectionHandler csh = CourseSectionHandler.Instance;
+            SectionID newSectionID = new SectionID();
+            //CourseID newCourseID = new CourseID();
+            Room newRoom;
+			MeetingTime newMT = new MeetingTime();
+            List<MeetingTime> newMeetingTimes = new List<MeetingTime>();
+            //String majorCode = "", courseNumber = "", sectionNumber = "";
+			string roomBuilding = "", roomNumber = "", instructorID = "", seats = "", time = "";
+			bool success;
+
+			newSectionID = PromptSectionID();
+
+
+			///* While loop to verify the user will create section for an existing course */
+			//while (!success)
+			//{
+			//	/* Get Major Code */
+			//	Console.WriteLine("Enter the Major Code for the section you wish to add:");
+			//	majorCode = Console.ReadLine();
+			//	/* Validate Major Code */
+			//	while (majorCode.Length != 3)
+			//	{
+			//		Console.WriteLine("Invalid Major Code\nEnter the correct Major Code for the new section:");
+			//		majorCode = Console.ReadLine();
+			//	}
+			//	/* Set Major Code */
+			//	newCourseID.MajorCode = majorCode;
+
+			//	/* Get Course Number */
+			//	Console.WriteLine("Great, now enter the course number for the new section:");
+			//	courseNumber = Console.ReadLine();
+			//	/* Validate Course Number */
+			//	while (courseNumber.Length != 3)
+			//	{
+			//		Console.WriteLine("Invalid Course Number\nEnter the correct Course Number for the new section:");
+			//		courseNumber = Console.ReadLine();
+			//	}
+			//	/* Set Course Number */
+			//	newCourseID.CourseNumber = Int32.Parse(courseNumber);
+
+			//	/* Check if a course exists with the specified Major Code and Course Number */
+			//	if (csh.GetCourse(newCourseID) == null)
+			//	{
+			//		Console.WriteLine("The specified course does not exist in the system. If you are trying to create a section for a course that does not exist, please add the course before adding a section of the course.");
+			//	}
+			//	else
+			//	{
+			//		success = true;
+			//	}
+			//}
+
+			///* Get Section Number */
+			//Console.WriteLine("Now what number is this new section?");
+			//success = false;
+			//while (!success)
+			//{
+			//	Console.WriteLine("Section Number : ");
+			//	sectionNumber = Console.ReadLine();
+			//	/* Validate Section Number */
+			//	if (sectionNumber.Length != 2)
+			//	{
+			//		Console.WriteLine("Invalid Section Number. Please enter a valid number for this section.");
+			//	}
+			//	else
+			//	{
+			//		newSectionID.CourseID = newCourseID;
+			//		newSectionID.SectionNumber = Int32.Parse(sectionNumber);
+			//		if (csh.GetSection(newSectionID) != null)
+			//		{
+			//			Console.WriteLine("The specified section number, {0}, already exists for the course {1}-{2}", sectionNumber, majorCode, courseNumber);
+			//		}
+			//		else
+			//		{
+			//			success = true;
+			//		}
+			//	}
+			//}
             Console.WriteLine("Great, you're new Section has the Section ID : {0}", newSectionID.ToString());
 
 			/* Get Room for the section */
 			Console.WriteLine("Now, please enter the following information about where this section will meet.");
 			/* Get building to create room */
-			Console.WriteLine("Building:");
+			Console.Write("Building: ");
 			roomBuilding = Console.ReadLine();
 			/* Get room number */
-			Console.WriteLine("Room Number:");
+			Console.Write("Room Number: ");
 			roomNumber = Console.ReadLine();
 			/* Create Room object */
 			newRoom = new Room(roomBuilding, Int32.Parse(roomNumber));
@@ -259,14 +302,14 @@ namespace CourseMan.Interface
 			/* Get Meeting Times */
 			Console.WriteLine("Now that we know where this new section will meet, lets get the details for when");
 			Console.WriteLine("How many times per week will this section meet?");
-			Console.WriteLine("Times to Meet per Week (e.g. 2): ");
+			Console.Write("Times to Meet per Week (e.g. 2): ");
 			int freq = Int32.Parse(Console.ReadLine());
 			Console.WriteLine("Please enter the following information for each meeting time.");
 			for (int i = 0; i < freq; i++)
 			{
 				Console.WriteLine("Meeting Time #{0}", i);
 				/* Get Day of the week for each MeetingTime */
-				Console.WriteLine("Day of the week (e.g. Monday) : ");
+				Console.Write("    Day of the week (e.g. Monday): ");
 				switch(Console.ReadLine())
 				{
 					case "Monday":
@@ -293,13 +336,19 @@ namespace CourseMan.Interface
 				}
 				/* Get Meeting time span for each MeetingTime */
 				Console.WriteLine("When does this meeting time start?");
-				Console.WriteLine("Start Time (HH:MM) : ");
+				Console.Write("Start Time (HH:MM AM/PM) : ");
 				time = Console.ReadLine();
-				newMT.StartTime = TimeSpan.Parse(time);
+				DateTime dateTime;
+				if (DateTime.TryParse(time, out dateTime))
+					newMT.StartTime = dateTime.TimeOfDay;
+				//newMT.StartTime = TimeSpan.Parse(time);
 				Console.WriteLine("When does this meeting time end?");
-				Console.WriteLine("End Time (HH:MM) : ");
+				Console.Write("End Time (HH:MM AM/PM) : ");
 				time = Console.ReadLine();
-				newMT.EndTime = TimeSpan.Parse(time);
+				if (DateTime.TryParse(time, out dateTime))
+					newMT.EndTime = dateTime.TimeOfDay;
+				//newMT.EndTime = TimeSpan.Parse(time);
+
 
 				newMeetingTimes.Add(newMT);
 			}
@@ -309,7 +358,7 @@ namespace CourseMan.Interface
 			success = false;
 			while (!success)
 			{
-				Console.WriteLine("Instructor ID : ");
+				Console.Write("Instructor ID: ");
 				instructorID = Console.ReadLine();
 				if (csh.GetUser(Int32.Parse(instructorID)).Type != UserType.Instructor)
 				{
