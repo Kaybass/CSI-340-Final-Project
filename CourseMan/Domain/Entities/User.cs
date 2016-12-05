@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CourseMan.Domain
+namespace CourseMan.Domain.Entities
 {
 	// The type of users. Students register for courses. Instructors teach
 	// courses. And  Administrators manage the CourseMan system, adding and
@@ -45,7 +45,8 @@ namespace CourseMan.Domain
             // Default constructor
         }
 		
-        public User(int id, string username, string password, string firstName, string lastName, UserType type, Department department)
+        public User(int id, string username, string password,
+			string firstName, string lastName, UserType type, Department department)
 		{
             this.userId = id;
             this.username = username;
@@ -56,43 +57,6 @@ namespace CourseMan.Domain
 			this.department = department;
 		}
 
-        public User(int id, string username, string password, string type, string department)
-        {
-            this.userId = id;
-            this.username = username;
-            this.password = password;
-            switch (type)
-            {
-                case "Student":
-                    this.type = UserType.Student;
-                    break;
-                case "Instructor":
-                    this.type = UserType.Instructor;
-                    break;
-                case "Administrator":
-                    this.type = UserType.Administrator;
-                    break;
-            }
-
-            switch (department)
-            {
-                case "CompSci":
-                    this.department = Department.CompSci;
-                    break;
-                case "Engineering":
-                    this.department = Department.Engineering;
-                    break;
-                case "Psychology":
-                    this.department = Department.Psychology;
-                    break;
-                case "English":
-                    this.department = Department.English;
-                    break;
-                case "History":
-                    this.department = Department.History;
-                    break;
-            }
-        }
 
         public int UserID
         {

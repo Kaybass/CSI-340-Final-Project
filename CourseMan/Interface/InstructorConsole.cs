@@ -1,14 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using CourseMan.Infrastructure;
 using CourseMan.Domain;
+using CourseMan.Domain.Entities;
 using CourseMan.Domain.Services;
 using CourseMan.Domain.ValueObjects;
-using CourseMan.Application.Services;
-using CourseMan.Application.ValueObjects;
+using CourseMan.Application;
 
 namespace CourseMan.Interface
 {

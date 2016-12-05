@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using CourseMan.Domain;
+using CourseMan.Domain.Entities;
 using CourseMan.Domain.Services;
 using CourseMan.Domain.ValueObjects;
-using CourseMan.Application.Services;
-using CourseMan.Application.ValueObjects;
+using CourseMan.Application;
 using CourseMan.Infrastructure;
 
 namespace CourseMan.Interface
@@ -24,6 +21,14 @@ namespace CourseMan.Interface
             AddMenuAction("D", "Drop a section you are registered for, ", UnRegisterForSection);
             AddMenuAction("L", "Logout", Logout);
         }
+
+		// Called when the menu is opened.
+		public override void OnMenuBegin()
+		{
+			// Customize the text based on the logged-in student's name.
+			User student = AuthenticationService.Instance.LoggedInUser;
+            Text = "Welcome to the Student console, " + student.FullName + "!";
+		}
 		
 		// Show a list of all available sections and their corresponding courses.
         public void ShowAvailableSections()

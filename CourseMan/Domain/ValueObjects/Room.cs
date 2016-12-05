@@ -1,14 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CourseMan.Domain.ValueObjects
 {
-	// Entity representing a room where a section meets.
-	// Rooms must be entities because two sections cannot be
-	// meeting in the same room at the same time.
+	// Value object representing a room where a section meets.
+	// Technically, a room is an entity, because two sections cannot 
+	// be meeting in the same room at the same time, but in our
+	// implementation, the room class is a value object because it 
+	// merely represents the ID of a room, as an attribute for a section.
     public struct Room
     {
         private string buildingName;

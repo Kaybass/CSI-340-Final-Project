@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CourseMan.Domain;
+using CourseMan.Domain.Entities;
 using CourseMan.Domain.Services;
 using CourseMan.Domain.ValueObjects;
-using CourseMan.Application.ValueObjects;
 
-namespace CourseMan.Application.Services
+namespace CourseMan.Application
 {
 	// Service object used to gather scheduling/timing information, including 
 	// creating objects for student and instructor schedules, and determining
@@ -17,6 +17,7 @@ namespace CourseMan.Application.Services
 	{
 		public ScheduleService()
 		{
+			// This service has no state information.
 		}
 
 

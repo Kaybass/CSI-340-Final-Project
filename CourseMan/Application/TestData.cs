@@ -1,36 +1,36 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using CourseMan.Domain.ValueObjects;
+using CourseMan.Domain;
+using CourseMan.Domain.Entities;
 using CourseMan.Domain.Services;
+using CourseMan.Domain.ValueObjects;
 
-namespace CourseMan.Domain
+namespace CourseMan.Application
 {
-	// Class used to populate the system with some initial test data,
+	// Service class used to populate the system with some initial test data,
 	// including users (students, instructors, and admins), courses, and
 	// sections.
     public class TestData
     {
         public TestData()
         {
+			// This service has no state information.
         }
 		
-		// Populate initial test data to the system.
-        public void addTheDataToTheThing()
+		// Populate the system with some initial test data,
+		// including users, courses, and sections.
+        public void AddTestDataToSystem()
         {
             CourseSectionHandler csh = CourseSectionHandler.Instance;
 			
-			User a = new User(1, "Adam.Acer", "password", "Adam", "Acer", UserType.Administrator, Department.CompSci);
-			User b = new User(2, "Brian.Banana", "password", "Brian", "Banana", UserType.Instructor, Department.CompSci);
-			User c = new User(3, "Chris.Cabana", "password", "Chris", "Cabana", UserType.Student, Department.CompSci);
-			User d = new User(4, "Dell.Diesel", "password", "Dell", "Diesel", UserType.Student, Department.CompSci);
-			User e = new User(5, "Evan.Edmunds", "password", "Evan", "Edmunds", UserType.Student, Department.CompSci);
-			User f = new User(6, "Faith.Faker", "password", "Faith", "Faker", UserType.Student, Department.CompSci);
-			User g = new User(7, "Gabriella.Gilly", "password", "Gabriella", "Gilly", UserType.Student, Department.CompSci);
-			User h = new User(8, "Harrison.Hammy", "password", "Harrison", "Hammy", UserType.Student, Department.CompSci);
-			User admin = new User(9, "a", "a", "Mr.", "Admin", UserType.Administrator, Department.CompSci);
+			User a = new User(1, "adam.acer", "password", "Adam", "Acer", UserType.Administrator, Department.CompSci);
+			User b = new User(2, "brian.banana", "password", "Brian", "Banana", UserType.Instructor, Department.CompSci);
+			User c = new User(3, "chris.cabana", "password", "Chris", "Cabana", UserType.Student, Department.CompSci);
+			User d = new User(4, "dell.diesel", "password", "Dell", "Diesel", UserType.Student, Department.Engineering);
+			User e = new User(5, "evan.edmunds", "password", "Evan", "Edmunds", UserType.Student, Department.English);
+			User f = new User(6, "faith.faker", "password", "Faith", "Faker", UserType.Student, Department.Psychology);
+			User g = new User(7, "habriella.gilly", "password", "Gabriella", "Gilly", UserType.Student, Department.History);
+			User h = new User(8, "harrison.hammy", "password", "Harrison", "Hammy", UserType.Student, Department.History);
+			User admin = new User(9, "a", "a", "Mr.", "Admin", UserType.Administrator, Department.Engineering);
 			User instructor = new User(10, "i", "i", "Mr.", "Instructor", UserType.Instructor, Department.CompSci);
 			User student = new User(11, "s", "s", "Mr.", "Student", UserType.Student, Department.CompSci);
 			

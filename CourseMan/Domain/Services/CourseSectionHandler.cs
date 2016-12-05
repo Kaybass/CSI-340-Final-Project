@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Collections;
+using CourseMan.Domain.Entities;
 using CourseMan.Domain.ValueObjects;
 
-namespace CourseMan.Domain
+namespace CourseMan.Domain.Services
 {
 	// Services class which provides a facade to the repositories of
 	// users, courses, and sections.
@@ -19,6 +20,7 @@ namespace CourseMan.Domain
         private Dictionary<SectionID, Section> sections;
 
 
+		// Private default constructor, creating empty data sets.
         private CourseSectionHandler()
 		{
 			users = new Dictionary<int, User>();
@@ -26,7 +28,9 @@ namespace CourseMan.Domain
 			sections = new Dictionary<SectionID, Section>();
 		}
 
-
+		
+		// Add a new course to the system, validating its attributes and
+		// throwing an exception if anything was invalid.
 		public void AddCourse(Course course)
 		{
 			// Does this course already exist?
@@ -37,7 +41,9 @@ namespace CourseMan.Domain
 			
 			courses[course.CourseID] = course;
 		}
-		
+
+		// Add a new section to the system, validating its attributes and
+		// throwing an exception if anything was invalid.
 		public void AddSection(Section section)
 		{
 			// Does this section already exist?
@@ -70,8 +76,16 @@ namespace CourseMan.Domain
 			sections[section.SectionID] = section;
 		}
 		
+		// Add a new user to the system, validating its attributes and
+		// throwing an exception if anything was invalid.
 		public void AddUser(User user)
 		{
+			// Does this section already exist?
+			if (users.ContainsKey(user.UserID))
+			{
+				throw new Exception("There is already a user with that ID");
+			}
+
 			users[user.UserID] = user;
 		}
 
@@ -87,13 +101,15 @@ namespace CourseMan.Domain
 			}
 		}
 
+		// Retrieve a course by its ID, returning null if it doesn't exist.
 		public Course GetCourse(CourseID courseId)
 		{
 			if (courses.ContainsKey(courseId))
 				return courses[courseId];
 			return null;
 		}
-
+		
+		// Retrieve a section by its ID, returning null if it doesn't exist.
 		public Section GetSection(SectionID sectionId)
 		{
 			if (sections.ContainsKey(sectionId))
@@ -101,6 +117,7 @@ namespace CourseMan.Domain
 			return null;
 		}
 
+		// Retrieve a user by its ID, returning null if it doesn't exist.
 		public User GetUser(int userId)
 		{
 			if (users.ContainsKey(userId))
@@ -108,18 +125,6 @@ namespace CourseMan.Domain
 			return null;
 		}
 
-
-		public static CourseSectionHandler Instance
-		{
-			get
-			{
-				if (instance == null)
-				{
-					instance = new CourseSectionHandler();
-				}
-				return instance;
-			}
-		}
 
 		public Dictionary<int, User> Users
         {
@@ -144,5 +149,16 @@ namespace CourseMan.Domain
             get { return CurrentSystemUser;  }
             set { CurrentSystemUser = value;  }
         }
+
+		// Return the singleton instance for this class.
+		public static CourseSectionHandler Instance
+		{
+			get
+			{
+				if (instance == null)
+					instance = new CourseSectionHandler();
+				return instance;
+			}
+		}
     }
 }

@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using CourseMan.Domain.ValueObjects;
 
-namespace CourseMan.Domain
+namespace CourseMan.Domain.Entities
 {
 	// Entity class representing an instance of a course. Courses
 	// are offered as multiple sections which students can register for,

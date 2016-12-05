@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 using CourseMan.Domain;
+using CourseMan.Domain.Entities;
 using CourseMan.Domain.Services;
-using CourseMan.Domain.ValueObjects;
 using CourseMan.Infrastructure;
 
 namespace CourseMan.Interface
@@ -22,8 +19,7 @@ namespace CourseMan.Interface
 			adminConsole = new AdminConsole();
             studentConsole = new StudentConsole();
             instructorconsole = new InstructorConsole();
-
-
+			
 			Text = "Welcome to the CourseMan! Please login to continue.";
 			AddMenuAction("L", "Log In", PromptLogin);
 			AddMenuAction("A", "About", ShowAboutInfo);

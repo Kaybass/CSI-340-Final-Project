@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CourseMan.Domain.Entities;
 using CourseMan.Domain.ValueObjects;
 
 namespace CourseMan.Domain.Services

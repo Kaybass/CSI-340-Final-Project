@@ -49,29 +49,29 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Application\Services\ScheduleService.cs" />
-    <Compile Include="Domain\Course.cs" />
-    <Compile Include="Domain\CourseSectionHandler.cs" />
+    <Compile Include="Application\ScheduleService.cs" />
+    <Compile Include="Domain\Entities\Course.cs" />
+    <Compile Include="Domain\Services\CourseSectionHandler.cs" />
     <Compile Include="Domain\Services\AuthenticationService.cs" />
     <Compile Include="Domain\Services\RegistrationService.cs" />
-    <Compile Include="Domain\TestData.cs" />
-    <Compile Include="Domain\User.cs" />
+    <Compile Include="Application\TestData.cs" />
+    <Compile Include="Domain\Entities\User.cs" />
     <Compile Include="Domain\ValueObjects\CourseID.cs" />
-    <Compile Include="Application\ValueObjects\Schedule.cs" />
+    <Compile Include="Application\Schedule.cs" />
     <Compile Include="Domain\ValueObjects\MeetingInfo.cs" />
     <Compile Include="Domain\ValueObjects\SectionID.cs" />
     <Compile Include="Infrastructure\IMenuItem.cs" />
     <Compile Include="Infrastructure\SubMenu.cs" />
     <Compile Include="Infrastructure\MenuAction.cs" />
-    <Compile Include="Interface\Menus\AdminConsole.cs" />
-    <Compile Include="Interface\Menus\InstructorConsole.cs" />
-    <Compile Include="Interface\Menus\LoginMenu.cs" />
+    <Compile Include="Interface\AdminConsole.cs" />
+    <Compile Include="Interface\InstructorConsole.cs" />
+    <Compile Include="Interface\LoginMenu.cs" />
     <Compile Include="Domain\ValueObjects\MeetingTime.cs" />
-    <Compile Include="Interface\Menus\StudentConsole.cs" />
+    <Compile Include="Interface\StudentConsole.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Domain\ValueObjects\Room.cs" />
-    <Compile Include="Domain\Section.cs" />
+    <Compile Include="Domain\Entities\Section.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

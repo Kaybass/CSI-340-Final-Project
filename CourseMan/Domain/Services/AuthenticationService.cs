@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CourseMan.Domain.Entities;
 
 namespace CourseMan.Domain.Services
 {
@@ -59,7 +60,8 @@ namespace CourseMan.Domain.Services
 		{
 			get { return CourseSectionHandler.Instance.GetUser(loggedInUserId); }
 		}
-
+		
+		// Return the singleton instance for this class.
 		public static AuthenticationService Instance
 		{
 			get

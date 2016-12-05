@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using CourseMan.Domain;
+using CourseMan.Domain.Entities;
 using CourseMan.Domain.Services;
 using CourseMan.Domain.ValueObjects;
 using CourseMan.Infrastructure;
@@ -21,6 +20,7 @@ namespace CourseMan.Interface
 			Text = "Welcome to the admin console!";
 			AddMenuAction("C", "See available courses", ShowAvailableCourses);
             AddMenuAction("S", "See available sections", ShowAvailableSections);
+            AddMenuAction("U", "See all users", ShowAllUsers);
             AddMenuAction("CC", "Create a new course", delegate ()
             {
                 Console.Write("Are you sure you want to create a new course to add to the system?\n(Y / N): ");
@@ -47,7 +47,7 @@ namespace CourseMan.Interface
 		// Called when the menu is opened.
 		public override void OnMenuBegin()
 		{
-			// Customize the text based on the logged-in instructor's name.
+			// Customize the text based on the logged-in admin's name.
 			User admin = AuthenticationService.Instance.LoggedInUser;
             Text = "Welcome to the admin console, " + admin.FullName + "!";
 		}
@@ -114,6 +114,31 @@ namespace CourseMan.Interface
             Console.ReadLine();
             Console.Clear();
         }
+
+		// Show a list of all users in the system.
+		public void ShowAllUsers()
+		{
+            Console.Clear();
+			Console.WriteLine("List of all users:\n");
+
+			string format = "{0,4} {1,17} {2,18} {3,15} {4,12}";
+
+			Console.WriteLine(format,
+				"ID", "Username", "Full Name", "Type", "Department");
+			Console.WriteLine(format,
+				"----", "-------------", "--------------", "------------", "----------");
+
+			foreach (User user in CourseSectionHandler
+				.Instance.Users.Values.OrderBy(u => u.UserID))
+			{
+				Console.WriteLine(format, user.UserID, user.Username,
+					user.FullName, user.Type, user.Department);
+			}
+			
+			Console.Write("\nPress enter to go back...");
+            Console.ReadLine();
+            Console.Clear();
+		}
 		
 		// Prompt the user to create a new course, adding it to the system.
         public void CreateNewCourse()

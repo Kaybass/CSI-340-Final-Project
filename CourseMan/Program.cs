@@ -1,17 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using CourseMan.Domain;
-using CourseMan.Interface;
-using CourseMan.Domain.Services;
-using CourseMan.Domain.ValueObjects;
 using CourseMan.Application;
-using CourseMan.Application.Services;
-using CourseMan.Application.ValueObjects;
-using CourseMan.Infrastructure;
+using CourseMan.Interface;
 
 namespace CourseMan
 {
@@ -24,7 +13,7 @@ namespace CourseMan
         static void Main()
         {
 			TestData data = new TestData();
-            data.addTheDataToTheThing();
+            data.AddTestDataToSystem();
 			
 			LoginMenu loginMenu = new LoginMenu();
 			loginMenu.PerformPressAction();

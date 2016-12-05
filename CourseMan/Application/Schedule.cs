@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using CourseMan.Domain;
+using CourseMan.Domain.Entities;
 
-namespace CourseMan.Application.ValueObjects
+namespace CourseMan.Application
 {
 	// Aggregate object representing a user's schedule of sections.
 	// If the user is a student, then the schedule is a list of sections
