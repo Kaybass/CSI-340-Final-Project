@@ -7,6 +7,10 @@ using CourseMan.Infrastructure;
 
 namespace CourseMan.Interface
 {
+	// The first menu shown in the program, which allows
+	// a user to log in with their username and password,
+	// taking them to the appropriate menu for whether they
+	// are an admin, student, or instructor.
 	public class LoginMenu : SubMenu
 	{
 		private AdminConsole      adminConsole;

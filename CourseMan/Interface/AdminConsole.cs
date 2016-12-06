@@ -9,12 +9,15 @@ using CourseMan.Infrastructure;
 
 namespace CourseMan.Interface
 {
+	// The menu shown when an administrator logs in.
+	// In this menu, an admin can view all courses, sections, and users.
+	// They can also create new courses and sections.
 	public class AdminConsole : SubMenu
 	{
 
 		public AdminConsole()
 		{
-			String input;
+			string input;
 
 			// Setup the admin console menu.
 			Text = "Welcome to the admin console!";
