@@ -16,14 +16,12 @@ namespace CourseMan.Domain.Services
 		}
 	}
 
-
+	// Service class used to register students for courses.
 	public class RegistrationService
 	{
-        private static RegistrationService instance = null;
-
-
 		public RegistrationService()
 		{
+			// This service has no state information.
 		}
 
 		// Register a student for a section.
@@ -35,10 +33,14 @@ namespace CourseMan.Domain.Services
 			if (section == null)
 				throw new RegistrationException("section " + sectionId + " does not exist.");
 
-			// Find the student.
+			// Find the user (student).
 			User student = CourseSectionHandler.Instance.GetUser(studentId);
 			if (student == null)
-				throw new RegistrationException("student ID " + studentId + " does not exist.");
+				throw new RegistrationException("user ID " + studentId + " does not exist.");
+
+			// Verify the user is a student.
+			if (student.Type != UserType.Student)
+				throw new RegistrationException("user ID " + studentId + " is not a student.");
 
 			// Check if the student is already registered for this section.
 			if (section.RegisteredStudents.Contains(studentId))
@@ -47,8 +49,6 @@ namespace CourseMan.Domain.Services
 			// Check if there are no empty seats.
 			if (section.IsFull)
 				throw new RegistrationException("no seats available for this section");
-
-			// TODO: Check for conflicting meeting times.
 
 			// Register the student.
 			section.RegisteredStudents.Add(studentId);
@@ -69,17 +69,6 @@ namespace CourseMan.Domain.Services
 			
 			// Unregister the student.
 			section.RegisteredStudents.Remove(studentId);
-		}
-
-		
-		public static RegistrationService Instance
-		{
-			get
-			{
-				if (instance == null)
-					instance = new RegistrationService();
-				return instance;
-			}
 		}
 	}
 }

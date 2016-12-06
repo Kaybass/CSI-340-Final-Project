@@ -89,18 +89,6 @@ namespace CourseMan.Domain.Services
 			users[user.UserID] = user;
 		}
 
-		public void RemoveCourseAndItsSections(Course course)
-		{
-			courses.Remove(course.CourseID);
-
-			// Remove all sections of this course.
-			foreach (var section in sections.Where(kv =>
-				kv.Key.CourseID == course.CourseID).ToList())
-			{
-				sections.Remove(section.Key);
-			}
-		}
-
 		// Retrieve a course by its ID, returning null if it doesn't exist.
 		public Course GetCourse(CourseID courseId)
 		{
@@ -142,12 +130,6 @@ namespace CourseMan.Domain.Services
         {
             get { return sections; }
             set { sections = value; }
-        }
-
-        public int CurrentSystemUser
-        {
-            get { return CurrentSystemUser;  }
-            set { CurrentSystemUser = value;  }
         }
 
 		// Return the singleton instance for this class.
