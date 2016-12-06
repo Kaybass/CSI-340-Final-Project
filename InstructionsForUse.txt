@@ -1,0 +1,30 @@
+The users created at runtime are defined as
+
+User a = new User(1, "adam.acer", "password", "Adam", "Acer", UserType.Administrator, Department.CompSci);
+User b = new User(2, "brian.banana", "password", "Brian", "Banana", UserType.Instructor, Department.CompSci);
+User c = new User(3, "chris.cabana", "password", "Chris", "Cabana", UserType.Student, Department.CompSci);
+User d = new User(4, "dell.diesel", "password", "Dell", "Diesel", UserType.Student, Department.Engineering);
+User e = new User(5, "evan.edmunds", "password", "Evan", "Edmunds", UserType.Student, Department.English);
+User f = new User(6, "faith.faker", "password", "Faith", "Faker", UserType.Student, Department.Psychology);
+User g = new User(7, "habriella.gilly", "password", "Gabriella", "Gilly", UserType.Student, Department.History);
+User h = new User(8, "harrison.hammy", "password", "Harrison", "Hammy", UserType.Student, Department.History);
+User admin = new User(9, "a", "a", "Mr.", "Admin", UserType.Administrator, Department.Engineering);
+User instructor = new User(10, "i", "i", "Mr.", "Instructor", UserType.Instructor, Department.CompSci);
+User student = new User(11, "s", "s", "Mr.", "Student", UserType.Student, Department.CompSci);
+
+in TestData.cs
+
+With this in mind the easiest way to test each user class is
+
+Admin:
+user: a
+pass: a
+
+Instructor:
+user: i
+pass: i
+
+Student:
+
+user: s
+pass: s
