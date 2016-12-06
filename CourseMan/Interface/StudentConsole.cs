@@ -9,6 +9,9 @@ using CourseMan.Infrastructure;
 
 namespace CourseMan.Interface
 {
+	// The menu shown when a student logs in.
+	// In this menu, a student can view all available sections,
+	// view their schedule, and register-for/drop secetions.
     public class StudentConsole : SubMenu
     {
 
@@ -112,6 +115,8 @@ namespace CourseMan.Interface
 		// Prompt the user to register for a section.
         public void RegisterForSection()
         {
+			RegistrationService registrationService = new RegistrationService();
+
             Console.Clear();
 			Console.WriteLine("Enter the ID of the section you want to register for:");
 			string input = Console.ReadLine();
@@ -129,7 +134,7 @@ namespace CourseMan.Interface
 				{
 					// Attempt to register for the section.
 					int myId = AuthenticationService.Instance.LoggedInUser.UserID;
-					RegistrationService.Instance.Register(myId, sectionId);
+					registrationService.Register(myId, sectionId);
 					Console.WriteLine("Successfully registered for {0}.", sectionId);
 				}
 				catch (Exception e)
@@ -146,6 +151,8 @@ namespace CourseMan.Interface
 		// Prompt the user to unregister for (drop) a section.
 		public void UnRegisterForSection()
 		{
+			RegistrationService registrationService = new RegistrationService();
+
             Console.Clear();
 			Console.WriteLine("Enter the ID of the section you want to drop:");
 			string input = Console.ReadLine();
@@ -163,7 +170,7 @@ namespace CourseMan.Interface
 				{
 					// Attempt to un-register for the section.
 					int myId = AuthenticationService.Instance.LoggedInUser.UserID;
-					RegistrationService.Instance.UnRegister(myId, sectionId);
+					registrationService.UnRegister(myId, sectionId);
 					Console.WriteLine("Successfully dropped {0}.", sectionId);
 				}
 				catch (Exception e)

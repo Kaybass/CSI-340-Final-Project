@@ -72,8 +72,9 @@ namespace CourseMan.Application
 			csi34002.MeetingInfo.Times.Add(new MeetingTime(DayOfWeek.Wednesday, 9,30, 10,45));
 			csh.AddSection(csi34002);
 
-			RegistrationService.Instance.Register(student.UserID, csi38502.SectionID);
-			RegistrationService.Instance.Register(student.UserID, csi34001.SectionID);
+			RegistrationService registrationService = new RegistrationService();
+			registrationService.Register(student.UserID, csi38502.SectionID);
+			registrationService.Register(student.UserID, csi34001.SectionID);
         }
     }
 }

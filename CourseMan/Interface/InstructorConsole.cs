@@ -9,6 +9,8 @@ using CourseMan.Application;
 
 namespace CourseMan.Interface
 {
+	// The menu shown when an instructor logs in.
+	// In this menu, an instructor can simply see his schedule.
     public class InstructorConsole : SubMenu
     {
 		
